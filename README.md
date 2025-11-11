@@ -1,2 +1,11 @@
-# mask-off-kickstarter
-a kickstarter landing page about a creative card game. with a unique style and playthrough that hook up backers.
+
+  # Landing Page Mockup
+
+  This is a code bundle for Landing Page Mockup. The original project is available at https://www.figma.com/design/qb7jVc2xlTbNPKuMvisKCh/Landing-Page-Mockup.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
