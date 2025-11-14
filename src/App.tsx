@@ -1,10 +1,10 @@
-import { Hero } from "./components/Hero";
-import { Features } from "./components/Features";
-import { Stats } from "./components/Stats";
-import { Gallery } from "./components/Gallery";
-import { CallToAction } from "./components/CallToAction";
+import { Hero } from './components/landing/Hero';
+import { Features } from '@/components/landing/Features';
+import { Stats } from '@/components/landing/Stats';
+import { Gallery } from '@/components/landing/Gallery';
+import { CallToAction } from '@/components/landing/CallToAction';
 
-export default function App() {
+function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
       <Hero />
@@ -15,3 +15,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
