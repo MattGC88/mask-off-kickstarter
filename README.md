@@ -1,7 +1,4 @@
 
-  # Landing Page Mockup
-
-  This is a code bundle for Landing Page Mockup. The original project is available at https://www.figma.com/design/qb7jVc2xlTbNPKuMvisKCh/Landing-Page-Mockup.
 
   ## Running the code
 
