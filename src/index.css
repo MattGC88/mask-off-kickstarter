@@ -20,48 +20,76 @@
 
 :root {
   --font-size: 16px;
-  --background: 0 0% 100%;
-  --foreground: 0 0% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 3.9%;
-  --primary: 0 0% 9%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96.1%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 96.1%;
-  --muted-foreground: 0 0% 45.1%;
-  --accent: 0 0% 96.1%;
-  --accent-foreground: 0 0% 9%;
-  --destructive: 0 84.2% 60.2%;
+
+  /* Light Mode - MaskOff Colors */
+  --background: 0 0% 98%; /* #faf9f5 */
+  --background-alt: 37 25% 93%; /* #f0eee6 */
+  --foreground: 210 4% 8%; /* #141413 - header/title */
+  --foreground-muted: 210 6% 39%; /* #5e6568 - paragraph text */
+
+  --card: 0 0% 98%;
+  --card-foreground: 210 4% 8%;
+  --popover: 0 0% 98%;
+  --popover-foreground: 210 4% 8%;
+
+  --primary: 16 48% 53%; /* #c96442 - action button */
+  --primary-foreground: 0 0% 98%; /* #faf9f5 - text in button */
+
+  --secondary: 242 28% 62%; /* #827dbd - illustration bg */
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 37 25% 93%;
+  --muted-foreground: 210 6% 39%;
+
+  --accent: 16 48% 53%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 85% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 89.8%;
-  --input: 0 0% 89.8%;
-  --ring: 0 0% 3.9%;
+
+  --border: 210 6% 39% / 0.2;
+  --input: 210 6% 39% / 0.2;
+  --ring: 16 48% 53%;
   --radius: 0.625rem;
+
+  /* Original Palette Additions */
+  --title-original: 0 0% 3%; /* #070707 */
+  --bg-original-1: 33 21% 91%; /* #EAE5DB */
+  --bg-original-2: 30 29% 94%; /* #F2EDE9 */
 }
 
-.dark {
-  --background: 0 0% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 0 0% 9%;
-  --secondary: 0 0% 14.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 14.9%;
-  --muted-foreground: 0 0% 63.9%;
-  --accent: 0 0% 14.9%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 14.9%;
-  --input: 0 0% 14.9%;
-  --ring: 0 0% 83.1%;
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode - Inverted MaskOff Colors */
+    --background: 210 4% 8%; /* #141413 - dark bg */
+    --background-alt: 210 6% 12%; /* darker variant */
+    --foreground: 0 0% 98%; /* #faf9f5 - light text */
+    --foreground-muted: 210 6% 70%; /* lighter muted text */
+
+    --card: 210 6% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 210 6% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 16 48% 53%; /* #c96442 - same action button */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 242 28% 62%; /* #827dbd - same illustration bg */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 210 6% 15%;
+    --muted-foreground: 210 6% 70%;
+
+    --accent: 16 48% 53%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 6% 25%;
+    --input: 210 6% 25%;
+    --ring: 16 48% 53%;
+  }
 }
 
 @layer base {
@@ -71,6 +99,22 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* MaskOff Utility Classes */
+  .bg-alt {
+    background-color: hsl(var(--background-alt));
+  }
+
+  .text-muted {
+    color: hsl(var(--foreground-muted));
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 

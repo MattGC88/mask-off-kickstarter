@@ -1,126 +1,190 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import Button from '../ui/button';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, X, CheckCircle, AlertCircle } from 'lucide-react';
+
+const failurePoints = [
+  'Continue buying games that complicate connection and tolerate superficiality',
+  'Another boring, forgettable game night filled with small talk',
+  'The frustration and anxiety from failing to achieve authentic connections',
+  'Wasted time and money on gatherings that never go deeper',
+];
+
+const successPoints = [
+  'Invest in MaskOff and guarantee every gathering is a victory for authenticity',
+  'Laughter, energy, and genuine excitement at every game night',
+  'Become the legendary host who creates authentic, memorable experiences',
+  'Deep friendships built on real conversations and honest moments',
+];
 
 export function CallToAction() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="py-24 px-4 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
+    <section className="py-24 px-4 relative overflow-hidden bg-alt">
+      <div ref={ref} className="max-w-6xl mx-auto relative z-10">
+        {/* Tag */}
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gray-700 rounded-full blur-3xl"
-        />
-      </div>
+          initial={{ opacity: 0, y: -10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="inline-flex items-center gap-2 bg-destructive/20 border border-destructive/50 rounded-full px-4 py-2 mb-8 mx-auto block w-fit"
+        >
+          <AlertCircle className="h-4 w-4 text-destructive" />
+          <span className="text-destructive text-sm font-semibold uppercase tracking-wide">
+            The Moment of Truth
+          </span>
+        </motion.div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-center leading-tight"
+        >
+          <span className="text-foreground">THE CHOICE IS SIMPLE.</span>
+          <br />
+          <span className="text-primary">WHAT WILL YOU CHOOSE?</span>
+        </motion.h2>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.2 }}
+          className="text-xl text-muted text-center mb-16 max-w-3xl mx-auto"
+        >
+          Every decision has consequences. Which path will you take?
+        </motion.p>
+
+        {/* The Contrast: Failure vs Success */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {/* OPTION A: The Failure */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="relative group"
+          >
+            {/* Card */}
+            <div className="relative bg-card border-2 border-destructive/50 rounded-3xl p-8 backdrop-blur-sm hover:border-destructive transition-all duration-300">
+              {/* Icon */}
+              <div className="text-7xl mb-6 text-center grayscale">😔</div>
+
+              {/* Title */}
+              <h3 className="text-3xl font-black text-destructive mb-6 text-center">
+                OPTION A
+                <span className="block text-xl text-muted font-normal mt-2">The Failure</span>
+              </h3>
+
+              {/* Pain Points */}
+              <ul className="space-y-4 mb-8">
+                {failurePoints.map((point, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <X className="h-6 w-6 text-destructive shrink-0 mt-1" />
+                    <span className="text-muted leading-relaxed">{point}</span>
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Warning Badge */}
+              <div className="bg-destructive/20 border border-destructive/50 rounded-xl p-4 text-center">
+                <p className="text-destructive font-semibold text-sm">
+                  ⚠️ The path of superficiality
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* OPTION B: The Success */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="relative group"
+          >
+            {/* Card */}
+            <div className="relative bg-primary/10 border-2 border-primary rounded-3xl p-8 backdrop-blur-sm hover:border-primary/80 hover:shadow-lg transition-all duration-300">
+              {/* Icon */}
+              <div className="text-7xl mb-6 text-center">🎉</div>
+
+              {/* Title */}
+              <h3 className="text-3xl font-black text-primary mb-6 text-center">
+                OPTION B
+                <span className="block text-xl text-foreground font-normal mt-2">The Success</span>
+              </h3>
+
+              {/* Success Points */}
+              <ul className="space-y-4 mb-8">
+                {successPoints.map((point, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <CheckCircle className="h-6 w-6 text-primary shrink-0 mt-1" />
+                    <span className="text-foreground leading-relaxed font-medium">{point}</span>
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Success Badge */}
+              <div className="bg-primary/30 border border-primary/50 rounded-xl p-4 text-center">
+                <p className="text-primary font-bold text-sm">✨ The path of authenticity</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Final Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-gray-700 rounded-2xl p-12 text-center relative overflow-hidden"
+          transition={{ delay: 0.8 }}
+          className="text-center"
         >
-          {/* Decorative corner elements */}
-          {[...Array(4)].map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: i * 0.5,
-              }}
-              className={`absolute w-24 h-24 border border-gray-600 rounded-lg ${
-                i === 0
-                  ? 'top-4 left-4'
-                  : i === 1
-                    ? 'top-4 right-4'
-                    : i === 2
-                      ? 'bottom-4 left-4'
-                      : 'bottom-4 right-4'
-              } opacity-20`}
-            />
-          ))}
+          <motion.p className="text-3xl md:text-4xl font-bold mb-8 leading-relaxed">
+            <span className="text-foreground">Don't let the Villain win.</span>
+            <br />
+            <span className="text-primary">Claim your Guide.</span>
+          </motion.p>
 
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-gray-700 rounded-full px-4 py-2 mb-6"
-          >
-            <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            <span className="text-gray-200">Limited Time Offer</span>
-            <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+          {/* Giant CTA Button */}
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground text-2xl md:text-3xl px-16 py-8 md:px-20 md:py-10 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <span className="flex items-center gap-4">
+                <span className="font-black">BACK THIS PROJECT</span>
+                <motion.div
+                  animate={{ x: [0, 10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="h-10 w-10" />
+                </motion.div>
+              </span>
+            </Button>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-gray-100 mb-4"
-          >
-            Be Part of Something Special
-          </motion.h2>
-
+          {/* Urgency reminder */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-gray-300 mb-8 max-w-2xl mx-auto"
+            transition={{ delay: 1.2 }}
+            className="mt-6 text-muted"
           >
-            Join thousands of backers in bringing this extraordinary deck to life. Early bird
-            rewards are limited - secure your deck today!
+            <span className="text-primary font-semibold">Limited Time</span> • Only{' '}
+            <span className="text-primary font-semibold">72 hours</span> remaining
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button
-              size="lg"
-              className="bg-gray-100 text-gray-900 hover:bg-gray-200 rounded-lg group"
-            >
-              Pledge Now
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </motion.div>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-gray-600 text-gray-100 hover:bg-gray-800 rounded-lg"
-            >
-              View Rewards
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-8 text-gray-400"
-          >
-            <p>🎯 250+ Early Bird Spots Remaining</p>
-          </motion.div>
         </motion.div>
       </div>
 
@@ -128,10 +192,11 @@ export function CallToAction() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        className="text-center mt-16 text-gray-500"
+        transition={{ duration: 0.8, delay: 1 }}
+        className="text-center mt-24 text-muted text-sm"
       >
-        <p>© 2025 Card Game Project. All rights reserved.</p>
+        <p>© 2025 MaskOff Card Game. All rights reserved.</p>
+        <p className="mt-2">Powered by BackerKit</p>
       </motion.div>
     </section>
   );
