@@ -1,4 +1,4 @@
-import { motion, useInView, useMotionValue, useTransform } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 import { MessageSquare, Star, CheckCircle, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -58,7 +58,6 @@ export function Gallery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [currentIndex, setCurrentIndex] = useState(0);
-  const x = useMotionValue(0);
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
@@ -84,7 +83,7 @@ export function Gallery() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-2 mb-8 mx-auto block w-fit"
+          className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-2 mb-8 mx-auto w-fit"
         >
           <MessageSquare className="h-4 w-4 text-accent" />
           <span className="text-accent text-sm font-semibold uppercase tracking-wide">
