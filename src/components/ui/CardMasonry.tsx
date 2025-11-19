@@ -59,7 +59,7 @@ export function CardMasonry({ autoScroll = true, scrollSpeed = 0.5 }: CardMasonr
 
   const Column = ({ items, offset }: { items: MasonryItem[]; offset: number }) => (
     <div
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-2 sm:gap-3 md:gap-4"
       style={{
         transform: `translateY(-${offset}px)`,
       }}
@@ -69,8 +69,7 @@ export function CardMasonry({ autoScroll = true, scrollSpeed = 0.5 }: CardMasonr
           key={`${item.id}-${index}`}
           whileHover={{ scale: 0.95, rotateZ: -2 }}
           transition={{ duration: 0.3 }}
-          className="relative overflow-hidden rounded-2xl border-2 border-border bg-card shadow-lg"
-          style={{ height: `${item.height}px`, width: '256px' }}
+          className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-border sm:border-2 bg-card shadow-lg w-32 h-48 sm:w-40 sm:h-60 md:w-52 md:h-80 lg:w-64 lg:h-96"
         >
           <img
             src={item.img}
@@ -89,15 +88,17 @@ export function CardMasonry({ autoScroll = true, scrollSpeed = 0.5 }: CardMasonr
   const column3 = [...cardImages.slice(5), ...cardImages.slice(0, 5), ...cardImages];
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden">
+    <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden">
       {/* Gradient overlays for fade effect */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-alt to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-alt to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-20 sm:h-24 md:h-32 bg-gradient-to-b from-alt to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-24 md:h-32 bg-gradient-to-t from-alt to-transparent z-10 pointer-events-none" />
 
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-2 sm:gap-3 md:gap-4 justify-center">
         <Column items={column1} offset={scrollY1} />
         <Column items={column2} offset={scrollY2} />
-        <Column items={column3} offset={scrollY3} />
+        <div className="hidden sm:block">
+          <Column items={column3} offset={scrollY3} />
+        </div>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ export function ThePlan() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-center"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-6 text-center"
         >
           <span className="text-foreground">3 STEPS TO WIN</span>{' '}
           <span className="text-primary">AUTHENTICITY</span>
@@ -67,7 +67,7 @@ export function ThePlan() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="text-xl text-muted text-center mb-16 max-w-2xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-muted text-center mb-16 max-w-2xl mx-auto"
         >
           It's simple. We've removed all the friction so you can focus on what matters: connection.
         </motion.p>
@@ -85,41 +85,48 @@ export function ThePlan() {
               {/* Step Number Badge */}
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                className="absolute -top-6 -left-6 w-20 h-20 bg-primary rounded-2xl flex items-center justify-center text-primary-foreground font-black text-2xl shadow-lg z-10 rotate-3"
+                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-16 h-16 sm:w-20 sm:h-20 bg-primary rounded-xl sm:rounded-2xl flex items-center justify-center text-primary-foreground font-black text-xl sm:text-2xl shadow-lg z-10 rotate-3"
               >
                 {step.step}
               </motion.div>
 
               {/* Card */}
-              <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-8 pt-16 hover:border-primary/50 transition-all duration-300 h-full group-hover:transform group-hover:-translate-y-2">
+              <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-6 pt-12 sm:p-8 sm:pt-16 hover:border-primary/50 transition-all duration-300 h-full group-hover:transform group-hover:-translate-y-2">
                 {/* Icon */}
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-primary mb-6"
-                >
-                  <step.icon className="h-12 w-12" />
-                </motion.div>
+                <div className="text-primary mb-4 sm:mb-6">
+                  <step.icon className="h-10 w-10 sm:h-12 sm:w-12" />
+                </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-foreground mb-2 leading-tight">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2 leading-tight">
                   {step.title}
                 </h3>
 
                 {/* Subtitle */}
-                <p className="text-sm text-primary/80 mb-4 font-semibold">{step.subtitle}</p>
+                <p className="text-xs sm:text-sm text-primary/80 mb-3 sm:mb-4 font-semibold">
+                  {step.subtitle}
+                </p>
 
                 {/* Description */}
-                <p className="text-muted mb-6 leading-relaxed">{step.description}</p>
+                <p className="text-muted text-sm sm:text-base mb-6 leading-relaxed">
+                  {step.description}
+                </p>
 
                 {/* CTA Button */}
-                <Button
-                  variant="outline"
-                  className="w-full border-primary/30 text-primary hover:bg-primary/10 hover:border-primary transition-all"
+                <a
+                  href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
                 >
-                  {step.cta}
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full border-primary/30 text-primary hover:bg-primary/10 hover:border-primary transition-all"
+                  >
+                    {step.cta}
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </a>
               </div>
 
               {/* Connector Arrow (except for last item) */}

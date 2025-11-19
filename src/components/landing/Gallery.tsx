@@ -95,7 +95,7 @@ export function Gallery() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-center"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-6 text-center"
         >
           <span className="text-foreground">WHAT PEOPLE ARE</span>{' '}
           <span className="text-primary">SAYING</span>
@@ -107,7 +107,7 @@ export function Gallery() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="text-xl text-muted text-center mb-16 max-w-2xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-muted text-center mb-16 max-w-2xl mx-auto"
         >
           Don't just take our word for it. Here's what early players are experiencing.
         </motion.p>
@@ -169,13 +169,13 @@ export function Gallery() {
                       </div>
 
                       {/* Testimonial Text */}
-                      <p className="text-muted text-xl md:text-2xl lg:text-3xl mb-6 leading-relaxed font-bold italic">
+                      <p className="text-muted text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 leading-relaxed font-bold italic">
                         "{testimonial.quote}"
                       </p>
 
                       {/* Author Info */}
-                      <div className="flex items-center gap-6 mb-4">
-                        <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+                      <div className="flex items-center gap-3 sm:gap-4 md:gap-6 mb-4">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 flex items-center justify-center">
                           <img
                             src={testimonial.maskImage}
                             alt={`${testimonial.author} avatar`}
@@ -183,10 +183,10 @@ export function Gallery() {
                           />
                         </div>
                         <div>
-                          <p className="text-foreground font-black text-2xl md:text-3xl mb-1">
+                          <p className="text-foreground font-black text-lg sm:text-xl md:text-2xl lg:text-3xl mb-1">
                             {testimonial.author}
                           </p>
-                          <p className="text-muted text-lg md:text-xl font-semibold">
+                          <p className="text-muted text-sm sm:text-base md:text-lg lg:text-xl font-semibold">
                             {testimonial.role}
                           </p>
                         </div>
@@ -195,7 +195,10 @@ export function Gallery() {
                       {/* Star Rating */}
                       <div className="flex gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-6 w-6 fill-primary text-primary" />
+                          <Star
+                            key={i}
+                            className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 fill-primary text-primary"
+                          />
                         ))}
                       </div>
 
@@ -243,10 +246,10 @@ export function Gallery() {
                 transition={{ delay: 0.3 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl sm:text-4xl md:text-5xl font-black text-primary mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-2">
                   {stat.value}
                 </div>
-                <div className="text-muted text-sm font-semibold uppercase tracking-wide">
+                <div className="text-muted text-xs sm:text-sm font-semibold uppercase tracking-wide">
                   {stat.label}
                 </div>
               </motion.div>

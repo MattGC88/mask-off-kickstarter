@@ -19,14 +19,19 @@ export function PlayingCard({
   illustration,
   title,
 }: PlayingCardProps) {
-  // Scroll-based transformations
+  // Scroll-based transformations with controlled ranges
   const scrollRotation = useTransform(
     scrollProgress,
-    [0, 0.5],
-    [rotation, rotation + (cardNumber - 2) * 20]
+    [0, 0.3, 0.6],
+    [rotation, rotation + (cardNumber - 2) * 10, rotation + (cardNumber - 2) * 15]
   );
-  const scrollY = useTransform(scrollProgress, [0, 0.5], [0, cardNumber * 50]);
-  const scrollScale = useTransform(scrollProgress, [0, 0.5], [1, 0.8]);
+  const scrollY = useTransform(
+    scrollProgress,
+    [0, 0.3, 0.6],
+    [0, cardNumber * 15, cardNumber * 25]
+  );
+  const scrollScale = useTransform(scrollProgress, [0, 0.3, 0.6], [1, 0.95, 0.9]);
+  const scrollOpacity = useTransform(scrollProgress, [0, 0.4, 0.6], [1, 0.8, 0.5]);
 
   return (
     <motion.div
@@ -43,16 +48,19 @@ export function PlayingCard({
         y: scrollY,
         scale: scrollScale,
         x: xOffset,
+        opacity: scrollOpacity,
+        zIndex: 0,
       }}
-      className="absolute w-64 h-96 rounded-xl shadow-2xl"
+      className="absolute w-40 h-56 sm:w-48 sm:h-72 md:w-56 md:h-80 lg:w-64 lg:h-96 rounded-xl shadow-2xl pointer-events-none"
       whileHover={{
         scale: 1.05,
         rotate: 0,
+        zIndex: 10,
         transition: { duration: 0.3 },
       }}
     >
       {/* Card Front */}
-      <div className="relative w-full h-full bg-card rounded-xl border-2 border-border overflow-hidden">
+      <div className="relative w-full h-full bg-card rounded-xl border-2 border-border overflow-hidden pointer-events-auto">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-secondary/10" />
 
@@ -78,9 +86,9 @@ export function PlayingCard({
 
             {/* Title Area (30% of card) */}
             {title && (
-              <div className="h-24 bg-primary/10 border-t-2 border-border flex items-center justify-center px-4">
+              <div className="h-16 sm:h-20 md:h-22 lg:h-24 bg-primary/10 border-t-2 border-border flex items-center justify-center px-2 sm:px-3 md:px-4">
                 <motion.h3
-                  className="text-foreground font-bold text-center text-lg"
+                  className="text-foreground font-bold text-center text-xs sm:text-sm md:text-base lg:text-lg"
                   animate={{
                     opacity: [0.8, 1, 0.8],
                   }}

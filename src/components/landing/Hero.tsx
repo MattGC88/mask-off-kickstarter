@@ -52,7 +52,7 @@ export function Hero() {
         </motion.p>
 
         {/* Playing Cards with Custom Illustrations */}
-        <div className="relative w-full max-w-4xl h-96 flex items-center justify-center mb-12">
+        <div className="relative w-full max-w-4xl h-64 sm:h-80 md:h-96 flex items-center justify-center mb-12">
           <PlayingCard
             delay={0.2}
             rotation={-15}
@@ -90,24 +90,36 @@ export function Hero() {
           className="flex flex-col sm:flex-row gap-4 mb-8"
         >
           {/* Primary CTA */}
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-10 py-7 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+          <a
+            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span className="flex items-center gap-2">
-              BACK THIS PROJECT
-              <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
-            </span>
-          </Button>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <span className="flex items-center gap-2">
+                BACK THIS PROJECT
+                <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform" />
+              </span>
+            </Button>
+          </a>
 
           {/* Secondary CTA - $1 Expansion */}
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-2 border-primary text-primary hover:bg-primary/10 text-lg px-10 py-7 rounded-xl group"
+          <a
+            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            🎁 Get Early Access for $1
-          </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-primary text-primary hover:bg-primary/10 text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl group"
+            >
+              🎁 Get Early Access for $1
+            </Button>
+          </a>
         </motion.div>
 
         {/* Urgency Info */}
@@ -115,17 +127,17 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="flex flex-col sm:flex-row items-center gap-4 text-muted text-sm mb-12"
+          className="flex flex-col sm:flex-row items-center gap-4 text-muted text-xs sm:text-sm mb-12"
         >
           <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-primary" />
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             <span>
               <span className="text-primary font-semibold">250+ backers</span> already supported
             </span>
           </div>
           <span className="hidden sm:block">•</span>
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-primary" />
+            <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             <span>
               <span className="text-primary font-semibold">72 hours</span> left
             </span>
