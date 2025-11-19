@@ -68,14 +68,14 @@ export function Features() {
             initial={{ opacity: 0, x: -50, scale: 0.8 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ type: 'spring', stiffness: 100, damping: 15 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black mb-3 leading-tight"
           >
             <span className="text-foreground">STOP THE SAME</span>{' '}
             <motion.span
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ type: 'spring', stiffness: 200, damping: 10, delay: 0.3 }}
-              className="text-muted line-through decoration-primary decoration-[6px]"
+              className="text-muted line-through decoration-primary decoration-[3px] sm:decoration-[4px] md:decoration-[5px] lg:decoration-[6px]"
             >
               BORING
             </motion.span>
@@ -84,7 +84,7 @@ export function Features() {
             initial={{ opacity: 0, x: 50, scale: 0.8 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.2 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black leading-tight"
           >
             <span className="text-foreground">CONVERSATIONS.</span>
           </motion.div>
@@ -95,19 +95,19 @@ export function Features() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: 'spring', stiffness: 80, delay: 0.5 }}
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
         >
           Are you tired of{' '}
           <motion.span
             initial={{ scale: 1 }}
             animate={isInView ? { scale: [1, 1.15, 1] } : {}}
             transition={{ duration: 0.6, delay: 1.2, repeat: Infinity, repeatDelay: 4 }}
-            className="text-primary font-black text-3xl sm:text-4xl md:text-5xl"
+            className="text-primary font-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
           >
             trivial small talk
           </motion.span>
           , awkward silences, or that frustrating feeling that everyone is wearing a{' '}
-          <span className="text-foreground font-black italic text-2xl sm:text-3xl md:text-4xl">
+          <span className="text-foreground font-black italic text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
             social mask
           </span>
           ? You spend time and money organizing gatherings only for them to stay on the surface.

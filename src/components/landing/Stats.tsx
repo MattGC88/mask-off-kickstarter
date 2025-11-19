@@ -46,7 +46,7 @@ export function Stats() {
             initial={{ opacity: 0, x: -50, scale: 0.8 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ type: 'spring', stiffness: 100, damping: 15 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-2 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black mb-2 leading-tight"
           >
             <span className="text-foreground">MEET YOUR GUIDE:</span>
           </motion.div>
@@ -54,7 +54,7 @@ export function Stats() {
             initial={{ opacity: 0, x: 50, scale: 0.8 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
             transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-black leading-tight"
           >
             <span className="text-primary">MASKOFF IS THE CURE</span>
           </motion.div>
@@ -65,7 +65,7 @@ export function Stats() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: 'spring', stiffness: 80, delay: 0.4 }}
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
         >
           We understand the frustration of disconnection. That's why we didn't just create a game—we
           created a{' '}
@@ -73,7 +73,7 @@ export function Stats() {
             initial={{ scale: 1 }}
             animate={isInView ? { scale: [1, 1.1, 1] } : {}}
             transition={{ duration: 0.5, delay: 1, repeat: Infinity, repeatDelay: 3 }}
-            className="text-primary font-black text-4xl sm:text-5xl md:text-6xl"
+            className="text-primary font-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
           >
             tool for authenticity
           </motion.span>
@@ -94,11 +94,6 @@ export function Stats() {
                 alt="MaskOff card game on table"
                 className="w-full h-auto rounded-xl"
               />
-
-              {/* Floating badge */}
-              <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold shadow-xl text-sm">
-                Premium Quality
-              </div>
             </div>
           </motion.div>
 
@@ -122,8 +117,8 @@ export function Stats() {
                 whileHover={{ scale: 1.05, x: 10 }}
                 className="group"
               >
-                <div className="flex items-start gap-6 bg-card border-2 border-border rounded-xl p-6 hover:border-primary transition-all duration-300">
-                  <div className="shrink-0 w-20 h-20 flex items-center justify-center">
+                <div className="flex items-start gap-4 sm:gap-6 bg-card border-2 border-border rounded-xl p-6 hover:border-primary transition-all duration-300">
+                  <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center">
                     <img
                       src={point.maskImage}
                       alt="Feature icon"
@@ -135,7 +130,7 @@ export function Stats() {
                       initial={{ opacity: 0 }}
                       animate={isInView ? { opacity: 1 } : {}}
                       transition={{ delay: 0.8 + index * 0.2 }}
-                      className="text-2xl md:text-3xl font-black text-foreground mb-3"
+                      className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-foreground mb-3"
                     >
                       {point.stat}
                     </motion.h3>
@@ -143,7 +138,7 @@ export function Stats() {
                       initial={{ opacity: 0 }}
                       animate={isInView ? { opacity: 1 } : {}}
                       transition={{ delay: 1 + index * 0.2 }}
-                      className="text-muted text-lg"
+                      className="text-muted text-sm sm:text-base md:text-lg"
                     >
                       {point.description}
                     </motion.p>
@@ -160,13 +155,19 @@ export function Stats() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center"
         >
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-12 py-7 rounded-xl shadow-lg hover:shadow-xl transition-all group"
+          <a
+            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            BACK THIS PROJECT
-            <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-2 transition-transform" />
-          </Button>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base md:text-lg px-8 py-5 sm:px-10 sm:py-6 md:px-12 md:py-7 rounded-xl shadow-lg hover:shadow-xl transition-all group"
+            >
+              BACK THIS PROJECT
+              <ArrowRight className="ml-2 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform" />
+            </Button>
+          </a>
         </motion.div>
       </div>
     </section>
