@@ -28,7 +28,7 @@ export function CallToAction() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="inline-flex items-center gap-2 bg-destructive/20 border border-destructive/50 rounded-full px-4 py-2 mb-8 mx-auto block w-fit"
+          className="inline-flex items-center gap-2 bg-destructive/20 border border-destructive/50 rounded-full px-4 py-2 mb-8 mx-auto w-fit"
         >
           <AlertCircle className="h-4 w-4 text-destructive" />
           <span className="text-destructive text-sm font-semibold uppercase tracking-wide">

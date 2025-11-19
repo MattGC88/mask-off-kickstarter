@@ -1,5 +1,6 @@
 import { Hero } from './components/landing/Hero';
 import { Features } from '@/components/landing/Features';
+import { CulturalHeritage } from '@/components/landing/CulturalHeritage';
 import { Stats } from '@/components/landing/Stats';
 import { ThePlan } from '@/components/landing/ThePlan';
 import { Gallery } from '@/components/landing/Gallery';

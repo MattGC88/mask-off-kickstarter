@@ -1,6 +1,6 @@
-import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
-import { MessageSquare, Star, CheckCircle, Quote } from 'lucide-react';
+import { motion, useInView, useMotionValue, useTransform } from 'motion/react';
+import { useRef, useState, useEffect } from 'react';
+import { MessageSquare, Star, CheckCircle, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
@@ -8,21 +8,42 @@ const testimonials = [
       "My game nights were never the same. This instantly became the easiest way to get everyone laughing and genuinely talking. I'm officially the best host!",
     author: 'Javier P.',
     role: 'Game Host',
-    avatar: '🎭',
+    maskImage: '/images/bamileke-mask.svg',
   },
   {
     quote:
       'I thought it was another simple game, but the 10 power cards turn it into social chess. Fast, addictive, and it genuinely makes you look at your friends differently.',
     author: 'Sofia V.',
     role: 'Game Designer',
-    avatar: '🎨',
+    maskImage: '/images/maori-mask.svg',
   },
   {
     quote:
       'Finally, a game my teens put their phones down for. The honesty and fun are exactly what we needed.',
     author: 'Mark R.',
     role: 'Family Gamer',
-    avatar: '👨‍👩‍👧‍👦',
+    maskImage: '/images/tlaloc-mask.svg',
+  },
+  {
+    quote:
+      'This game is WILD! We played for 3 hours straight and nobody wanted to stop. The perfect mix of strategy and chaos.',
+    author: 'Emma L.',
+    role: 'Competitive Player',
+    maskImage: '/images/elvisi-mask.svg',
+  },
+  {
+    quote:
+      'As a therapist, I love how this game naturally opens up conversations. It creates a safe space for vulnerability and authentic connection.',
+    author: 'Dr. Chen',
+    role: 'Clinical Psychologist',
+    maskImage: '/images/vuvi-mask.svg',
+  },
+  {
+    quote:
+      'Simple rules, endless depth. My gaming group has been searching for something like this for years. The cultural masks are a beautiful touch too.',
+    author: 'Marcus T.',
+    role: 'Board Game Enthusiast',
+    maskImage: '/images/bamana-mask.svg',
   },
 ];
 
@@ -36,9 +57,28 @@ const stats = [
 export function Gallery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const x = useMotionValue(0);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
 
   return (
-    <section ref={ref} className="py-24 px-4 relative bg-background">
+    <section ref={ref} className="py-24 px-4 relative bg-background overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Tag */}
         <motion.div
@@ -73,62 +113,120 @@ export function Gallery() {
           Don't just take our word for it. Here's what early players are experiencing.
         </motion.p>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.15 }}
-              whileHover={{ y: -10, transition: { duration: 0.2 } }}
-              className="group relative"
-            >
-              {/* Card */}
-              <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
-                {/* Quote Icon */}
-                <div className="text-primary/30 mb-4">
-                  <Quote className="h-12 w-12" />
-                </div>
+        {/* Carousel Container */}
+        <div className="relative mb-12">
+          {/* Navigation Buttons */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-16 md:h-16 bg-primary hover:bg-primary/90 text-background rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 -translate-x-4 md:-translate-x-8"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
+          </button>
 
-                {/* Testimonial Text */}
-                <p className="text-muted mb-6 leading-relaxed flex-grow italic">
-                  "{testimonial.quote}"
-                </p>
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-16 md:h-16 bg-primary hover:bg-primary/90 text-background rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 translate-x-4 md:translate-x-8"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
+          </button>
 
-                {/* Author Info */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-2xl">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <p className="text-foreground font-bold">{testimonial.author}</p>
-                    <p className="text-muted text-sm">{testimonial.role}</p>
-                  </div>
-                </div>
+          {/* Carousel Track */}
+          <div className="overflow-hidden px-4 md:px-16">
+            <div className="flex justify-center">
+              <motion.div
+                className="flex"
+                style={{ width: '100%' }}
+                animate={{
+                  x: `-${currentIndex * 100}%`,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                }}
+              >
+                {testimonials.map((testimonial, index) => (
+                  <motion.div
+                    key={index}
+                    className="w-full flex-shrink-0 flex justify-center items-center px-2"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={
+                      isInView
+                        ? {
+                            opacity: currentIndex === index ? 1 : 0.4,
+                            scale: currentIndex === index ? 1 : 0.85,
+                          }
+                        : {}
+                    }
+                    transition={{ duration: 0.5 }}
+                  >
+                    {/* Card */}
+                    <div className="relative bg-card border-2 border-border rounded-3xl p-6 md:p-10 max-w-3xl w-full hover:border-primary transition-all duration-300">
+                      {/* Quote Icon */}
+                      <div className="text-primary/30 mb-4">
+                        <Quote className="h-12 w-12 md:h-16 md:w-16" />
+                      </div>
 
-                {/* Star Rating */}
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 0.5 + i * 0.1 }}
-                    >
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                    </motion.div>
-                  ))}
-                </div>
+                      {/* Testimonial Text */}
+                      <p className="text-muted text-xl md:text-2xl lg:text-3xl mb-6 leading-relaxed font-bold italic">
+                        "{testimonial.quote}"
+                      </p>
 
-                {/* Verified Badge */}
-                <div className="absolute top-4 right-4 bg-accent/20 border border-accent/50 rounded-full px-3 py-1 flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-accent" />
-                  <span className="text-accent text-xs font-semibold">Verified</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                      {/* Author Info */}
+                      <div className="flex items-center gap-6 mb-4">
+                        <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+                          <img
+                            src={testimonial.maskImage}
+                            alt={`${testimonial.author} avatar`}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-foreground font-black text-2xl md:text-3xl mb-1">
+                            {testimonial.author}
+                          </p>
+                          <p className="text-muted text-lg md:text-xl font-semibold">
+                            {testimonial.role}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Star Rating */}
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-6 w-6 fill-primary text-primary" />
+                        ))}
+                      </div>
+
+                      {/* Verified Badge */}
+                      <div className="absolute top-4 right-4 bg-accent/20 border-2 border-accent rounded-full px-3 py-1.5 flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-accent" />
+                        <span className="text-accent text-xs font-bold">Verified Backer</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex justify-center gap-3 mt-8">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  currentIndex === index
+                    ? 'w-12 h-3 bg-primary'
+                    : 'w-3 h-3 bg-border hover:bg-primary/50'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Stats Bar */}

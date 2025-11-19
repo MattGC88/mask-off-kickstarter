@@ -1,25 +1,41 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { Moon, Frown, Puzzle } from 'lucide-react';
+import { CardMasonry } from '../ui/CardMasonry';
 
 const painPoints = [
   {
-    icon: '😴',
+    icon: Moon,
     title: 'Forgettable Nights',
     description:
       'Another gathering that feels like work instead of fun. You leave wondering why you bothered.',
+    bgColor: 'bg-alt',
+    accentColor: 'bg-primary',
+    iconColor: 'text-primary',
+    textColor: 'text-foreground',
+    size: 'large', // Bento box sizing
   },
   {
-    icon: '😰',
+    icon: Frown,
     title: 'Connection Anxiety',
     description:
       'The internal frustration and anxiety from failing to achieve authentic connections with your friends.',
+    bgColor: 'bg-background',
+    accentColor: 'bg-secondary',
+    iconColor: 'text-secondary',
+    textColor: 'text-foreground',
+    size: 'medium',
   },
   {
-    icon: '🎲',
+    icon: Puzzle,
     title: 'Complicated Games',
     description:
       "The fear of bringing yet another game that's too complex to teach, killing the mood before it starts.",
+    bgColor: 'bg-alt',
+    accentColor: 'bg-primary',
+    iconColor: 'text-primary',
+    textColor: 'text-foreground',
+    size: 'small',
   },
 ];
 
@@ -29,12 +45,12 @@ export function Features() {
 
   return (
     <section ref={ref} className="py-24 px-4 relative overflow-hidden bg-alt">
-      {/* Background - Masked figures pattern */}
-      <div className="absolute inset-0 opacity-3">
-        <div className="absolute inset-0 bg-[url('/masked-figures.svg')] bg-repeat" />
+      {/* Background - MaskOff brand pattern */}
+      <div className="absolute inset-0 opacity-[0.08]">
+        <img src="/images/maskoff-pattern.png" alt="" className="w-full h-full object-cover" />
       </div>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Tag */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -47,69 +63,161 @@ export function Features() {
         </motion.div>
 
         {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight"
-        >
-          <span className="text-foreground">STOP THE SAME</span>{' '}
-          <span className="text-muted line-through decoration-destructive decoration-4">
-            BORING
-          </span>
-          <br />
-          <span className="text-foreground">CONVERSATIONS.</span>
-        </motion.h2>
+        <div className="mb-8 max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, x: -50, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3 leading-tight"
+          >
+            <span className="text-foreground">STOP THE SAME</span>{' '}
+            <motion.span
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ type: 'spring', stiffness: 200, damping: 10, delay: 0.3 }}
+              className="text-muted line-through decoration-primary decoration-[6px]"
+            >
+              BORING
+            </motion.span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+            transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.2 }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight"
+          >
+            <span className="text-foreground">CONVERSATIONS.</span>
+          </motion.div>
+        </div>
 
         {/* Problem Description */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.2 }}
-          className="text-lg sm:text-xl md:text-2xl text-muted mb-12 max-w-3xl leading-relaxed"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: 'spring', stiffness: 80, delay: 0.5 }}
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
         >
           Are you tired of{' '}
-          <span className="text-destructive font-semibold">trivial small talk</span>, awkward
-          silences, or that frustrating feeling that everyone is wearing a{' '}
-          <span className="text-foreground-muted font-semibold italic">social mask</span>? You spend
-          time and money organizing gatherings only for them to stay on the surface.
+          <motion.span
+            initial={{ scale: 1 }}
+            animate={isInView ? { scale: [1, 1.15, 1] } : {}}
+            transition={{ duration: 0.6, delay: 1.2, repeat: Infinity, repeatDelay: 4 }}
+            className="text-primary font-black text-3xl sm:text-4xl md:text-5xl"
+          >
+            trivial small talk
+          </motion.span>
+          , awkward silences, or that frustrating feeling that everyone is wearing a{' '}
+          <span className="text-foreground font-black italic text-2xl sm:text-3xl md:text-4xl">
+            social mask
+          </span>
+          ? You spend time and money organizing gatherings only for them to stay on the surface.
         </motion.p>
 
-        {/* Pain Points Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {painPoints.map((pain, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.15 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="group relative"
-            >
-              <div className="relative bg-card/60 backdrop-blur-sm border border-border rounded-xl p-8 hover:border-primary/50 transition-all duration-300">
-                <div className="text-5xl mb-4">{pain.icon}</div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{pain.title}</h3>
-                <p className="text-muted leading-relaxed">{pain.description}</p>
-              </div>
-            </motion.div>
-          ))}
+        {/* Bento Box Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {painPoints.map((pain, index) => {
+            // Bento box responsive layout
+            const gridSpan =
+              pain.size === 'large'
+                ? 'md:col-span-7'
+                : pain.size === 'medium'
+                  ? 'md:col-span-5'
+                  : 'md:col-span-12';
+
+            const heightClass =
+              pain.size === 'large'
+                ? 'md:min-h-[400px]'
+                : pain.size === 'medium'
+                  ? 'md:min-h-[400px]'
+                  : 'md:min-h-[280px]';
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, rotateX: -15 }}
+                animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+                transition={{
+                  delay: index * 0.2,
+                  type: 'spring',
+                  stiffness: 100,
+                }}
+                whileHover={{
+                  y: -10,
+                  rotateX: 5,
+                  rotateY: 5,
+                  transition: { duration: 0.3 },
+                }}
+                className={`${gridSpan} ${heightClass} group relative`}
+                style={{ perspective: '1000px' }}
+              >
+                {/* 3D Card Container */}
+                <div
+                  className={`relative h-full ${pain.bgColor} border-2 border-border rounded-3xl p-8 overflow-hidden transition-all duration-300 group-hover:border-primary group-hover:shadow-2xl`}
+                >
+                  {/* Corner accent stripe */}
+                  <div
+                    className={`absolute top-0 right-0 w-2 h-32 ${pain.accentColor} transition-all duration-300 group-hover:h-48`}
+                  />
+                  <div
+                    className={`absolute top-0 right-0 h-2 w-32 ${pain.accentColor} transition-all duration-300 group-hover:w-48`}
+                  />
+
+                  {/* Content */}
+                  <div className="relative z-10 h-full flex flex-col justify-between">
+                    {/* Icon - static, no animation */}
+                    <div className={`${pain.iconColor} mb-6`}>
+                      <pain.icon className="w-16 h-16 md:w-20 md:h-20" strokeWidth={2} />
+                    </div>
+
+                    {/* Title */}
+                    <div>
+                      <motion.h3
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 120,
+                          delay: 0.8 + index * 0.2,
+                        }}
+                        className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4 leading-tight"
+                      >
+                        {pain.title}
+                      </motion.h3>
+
+                      {/* Description */}
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ delay: 1 + index * 0.2 }}
+                        className="text-muted text-lg md:text-xl leading-relaxed font-medium"
+                      >
+                        {pain.description}
+                      </motion.p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* The Real Cost */}
+        {/* Card Masonry Gallery */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          className="bg-destructive/10 border border-destructive/30 rounded-2xl p-8 backdrop-blur-sm"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: 'spring', stiffness: 80, delay: 1.2 }}
+          className="mt-24"
         >
-          <h3 className="text-2xl font-bold text-destructive mb-4 flex items-center gap-3">
-            <AlertTriangle className="h-6 w-6" />
-            The Real Cost
-          </h3>
-          <p className="text-foreground text-lg leading-relaxed">
-            Every boring game night is a missed opportunity. Every surface-level conversation is a
-            relationship that could have been deeper. Every complicated rulebook is energy wasted
-            that could have been spent{' '}
-            <span className="text-primary font-semibold">actually connecting</span>.
-          </p>
+          <motion.h3
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ type: 'spring', stiffness: 100, delay: 1.3 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-12 text-center"
+          >
+            <span className="text-primary">SIMPLE.</span> VISUAL.{' '}
+            <span className="text-primary">POWERFUL.</span>
+          </motion.h3>
+          <CardMasonry autoScroll={true} scrollSpeed={0.5} />
         </motion.div>
       </div>
     </section>
