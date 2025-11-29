@@ -5,6 +5,8 @@ interface MasonryItem {
   id: string;
   img: string;
   height: number;
+  question: string;
+  type: string;
 }
 
 interface CardMasonryProps {
@@ -13,23 +15,119 @@ interface CardMasonryProps {
 }
 
 const cardImages: MasonryItem[] = [
-  { id: '1', img: '/images/card-lile-orange.svg', height: 384 },
-  { id: '2', img: '/illustrations/card-8.png', height: 384 },
-  { id: '3', img: '/images/beige-green-card.svg', height: 384 },
-  { id: '4', img: '/illustrations/card-7.png', height: 384 },
-  { id: '5', img: '/illustrations/card-1.svg', height: 384 },
-  { id: '6', img: '/illustrations/card-2.svg', height: 384 },
-  { id: '7', img: '/illustrations/card-3.svg', height: 384 },
-  { id: '8', img: '/illustrations/card-4.svg', height: 384 },
-  { id: '9', img: '/illustrations/card-5.png', height: 384 },
-  { id: '10', img: '/illustrations/card-6.png', height: 384 },
-  { id: '11', img: '/illustrations/card-7.png', height: 384 },
-  { id: '12', img: '/images/blue-beige.svg', height: 384 },
-  { id: '13', img: '/illustrations/card-9.png', height: 384 },
+  {
+    id: '1',
+    img: '/illustrations/kyogen-card.png',
+    height: 384,
+    question: 'What mask do you wear most often?',
+    type: 'Connection',
+  },
+  {
+    id: '2',
+    img: '/illustrations/elvise-card.png',
+    height: 384,
+    question: 'What truth have you been avoiding?',
+    type: 'Revelation',
+  },
+  {
+    id: '3',
+    img: '/illustrations/bamana-card.png',
+    height: 384,
+    question: 'When did you last feel truly seen?',
+    type: 'Authenticity',
+  },
+  {
+    id: '4',
+    img: '/illustrations/vuvi-card.png',
+    height: 384,
+    question: "What would you do if you couldn't fail?",
+    type: 'Dreams',
+  },
+  {
+    id: '5',
+    img: '/illustrations/bamileke-card.png',
+    height: 384,
+    question: "What's your biggest fear about connection?",
+    type: 'Vulnerability',
+  },
+  {
+    id: '6',
+    img: '/illustrations/tlaloc-card.png',
+    height: 384,
+    question: 'Who knows the real you?',
+    type: 'Identity',
+  },
+  {
+    id: '7',
+    img: '/illustrations/boes-card.png',
+    height: 384,
+    question: 'What conversation have you been postponing?',
+    type: 'Courage',
+  },
+  {
+    id: '8',
+    img: '/illustrations/kawakwaka-card.png',
+    height: 384,
+    question: 'What makes you feel most alive?',
+    type: 'Purpose',
+  },
+  {
+    id: '9',
+    img: '/illustrations/maori-card.png',
+    height: 384,
+    question: 'When do you feel like an impostor?',
+    type: 'Truth',
+  },
   // Duplicate for seamless loop
-  { id: '14', img: '/images/card-lile-orange.svg', height: 384 },
-  { id: '15', img: '/illustrations/card-1.svg', height: 384 },
-  { id: '16', img: '/illustrations/card-5.png', height: 384 },
+  {
+    id: '10',
+    img: '/illustrations/kyogen-card.png',
+    height: 384,
+    question: 'What mask do you wear most often?',
+    type: 'Connection',
+  },
+  {
+    id: '11',
+    img: '/illustrations/elvise-card.png',
+    height: 384,
+    question: 'What truth have you been avoiding?',
+    type: 'Revelation',
+  },
+  {
+    id: '12',
+    img: '/illustrations/bamana-card.png',
+    height: 384,
+    question: 'When did you last feel truly seen?',
+    type: 'Authenticity',
+  },
+  {
+    id: '13',
+    img: '/illustrations/vuvi-card.png',
+    height: 384,
+    question: "What would you do if you couldn't fail?",
+    type: 'Dreams',
+  },
+  {
+    id: '14',
+    img: '/illustrations/bamileke-card.png',
+    height: 384,
+    question: "What's your biggest fear about connection?",
+    type: 'Vulnerability',
+  },
+  {
+    id: '15',
+    img: '/illustrations/tlaloc-card.png',
+    height: 384,
+    question: 'Who knows the real you?',
+    type: 'Identity',
+  },
+  {
+    id: '16',
+    img: '/illustrations/boes-card.png',
+    height: 384,
+    question: 'What conversation have you been postponing?',
+    type: 'Courage',
+  },
 ];
 
 export function CardMasonry({ autoScroll = true, scrollSpeed = 0.5 }: CardMasonryProps) {
@@ -69,14 +167,26 @@ export function CardMasonry({ autoScroll = true, scrollSpeed = 0.5 }: CardMasonr
           key={`${item.id}-${index}`}
           whileHover={{ scale: 0.95, rotateZ: -2 }}
           transition={{ duration: 0.3 }}
-          className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-border sm:border-2 bg-card shadow-lg w-32 h-48 sm:w-40 sm:h-60 md:w-52 md:h-80 lg:w-64 lg:h-96"
+          className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-border sm:border-2 bg-card shadow-lg w-32 h-48 sm:w-40 sm:h-60 md:w-52 md:h-80 lg:w-64 lg:h-96 group cursor-pointer"
         >
           <img
             src={item.img}
             alt={`Card ${item.id}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-30"
             draggable={false}
           />
+
+          {/* Hover Overlay with Question */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4 md:p-6">
+            <div className="mb-2">
+              <span className="inline-block bg-primary/90 text-primary-foreground text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full">
+                {item.type}
+              </span>
+            </div>
+            <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-bold leading-tight">
+              {item.question}
+            </p>
+          </div>
         </motion.div>
       ))}
     </div>

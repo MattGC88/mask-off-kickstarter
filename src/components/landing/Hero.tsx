@@ -14,7 +14,7 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-background">
+    <div ref={containerRef} className="relative min-h-screen bg-background">
       {/* Background Pattern - MaskOff pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[url('/mask-pattern.svg')] bg-repeat" />
@@ -31,12 +31,23 @@ export function Hero() {
           transition={{ delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-center mb-6 leading-tight max-w-6xl"
         >
-          <span className="text-foreground">DITCH THE</span>{' '}
-          <span className="text-primary">MASKS</span>
+          <span className="text-foreground">SMALL TALK IS</span>{' '}
+          <span className="text-accent">KILLING</span>
           <br />
-          <span className="text-foreground">WIN THE</span>{' '}
-          <span className="text-primary">TRUTH</span>
+          <span className="text-foreground">YOUR</span>{' '}
+          <span className="text-primary">FRIENDSHIPS</span>
         </motion.h1>
+
+        {/* Impact Statement */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, type: 'spring' }}
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-center mb-8 max-w-4xl"
+        >
+          <span className="text-foreground">TIME TO</span>{' '}
+          <span className="text-primary">BURN THE MASKS.</span>
+        </motion.div>
 
         {/* Subheadline */}
         <motion.p
@@ -45,14 +56,14 @@ export function Hero() {
           transition={{ delay: 0.4 }}
           className="text-lg sm:text-xl md:text-2xl text-muted max-w-3xl mx-auto mb-12 text-center leading-relaxed px-4"
         >
-          The fast-paced card game that{' '}
-          <span className="text-foreground font-semibold">forces your friends</span> to know each
-          other better by <span className="text-primary font-semibold">demanding authenticity</span>
-          .
+          Stop wasting nights on surface-level conversations.{' '}
+          <span className="text-foreground font-semibold">MaskOff breaks through the facade</span>{' '}
+          and creates the{' '}
+          <span className="text-primary font-semibold">real connections you've been missing</span>.
         </motion.p>
 
         {/* Playing Cards with Custom Illustrations */}
-        <div className="relative w-full max-w-4xl h-64 sm:h-80 md:h-96 flex items-center justify-center mb-12">
+        <div className="relative w-full max-w-4xl h-64 sm:h-80 md:h-96 flex items-center justify-center mb-8">
           <PlayingCard
             delay={0.2}
             rotation={-15}
@@ -82,6 +93,26 @@ export function Hero() {
           />
         </div>
 
+        {/* Gameplay Snapshot */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="mb-12 max-w-2xl mx-auto"
+        >
+          <div className="bg-card/80 backdrop-blur-sm border-2 border-primary/30 rounded-2xl p-6 sm:p-8">
+            <div className="text-center">
+              <p className="text-xl sm:text-2xl md:text-3xl font-black text-foreground mb-3 leading-tight">
+                "What mask do you wear most often?"
+              </p>
+              <div className="flex items-center justify-center gap-2 text-sm sm:text-base text-muted">
+                <span className="inline-block w-2 h-2 bg-primary rounded-full"></span>
+                <span className="font-semibold">Actual card from the game</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,9 +130,14 @@ export function Hero() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
-              <span className="flex items-center gap-2">
-                BACK THIS PROJECT
-                <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform" />
+              <span className="flex flex-col items-center gap-1">
+                <span className="flex items-center gap-2">
+                  BACK NOW - SAVE 25%
+                  <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform" />
+                </span>
+                <span className="text-xs sm:text-sm opacity-90 font-semibold">
+                  Early Bird pricing ends soon
+                </span>
               </span>
             </Button>
           </a>
@@ -117,29 +153,37 @@ export function Hero() {
               variant="outline"
               className="border-2 border-primary text-primary hover:bg-primary/10 text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl group"
             >
-              🎁 Get Early Access for $1
+              <span className="flex flex-col items-center gap-1">
+                <span>🎁 Try for Just $1</span>
+                <span className="text-xs sm:text-sm opacity-80">Zero commitment entry</span>
+              </span>
             </Button>
           </a>
         </motion.div>
 
-        {/* Urgency Info */}
+        {/* Trust Signals & Urgency */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="flex flex-col sm:flex-row items-center gap-4 text-muted text-xs sm:text-sm mb-12"
+          className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-xs sm:text-sm mb-12"
         >
-          <div className="flex items-center gap-2">
-            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
-            <span>
-              <span className="text-primary font-semibold">250+ backers</span> already supported
+          <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2">
+            <Users className="h-4 w-4 text-primary" />
+            <span className="text-foreground font-bold">
+              <span className="text-primary">250+</span> backed in 72hrs
             </span>
           </div>
-          <span className="hidden sm:block">•</span>
-          <div className="flex items-center gap-2">
-            <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
-            <span>
-              <span className="text-primary font-semibold">72 hours</span> left
+          <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-2">
+            <Clock className="h-4 w-4 text-accent" />
+            <span className="text-foreground font-bold">
+              Campaign ends: <span className="text-accent">72 hours</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-4 py-2">
+            <ChevronDown className="h-4 w-4 text-accent" />
+            <span className="text-foreground font-bold">
+              <span className="text-accent">15+</span> successful playtests
             </span>
           </div>
         </motion.div>

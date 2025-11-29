@@ -6,9 +6,11 @@ import { CardMasonry } from '../ui/CardMasonry';
 const painPoints = [
   {
     icon: Moon,
-    title: 'Forgettable Nights',
-    description:
-      'Another gathering that feels like work instead of fun. You leave wondering why you bothered.',
+    title: 'Instant Depth',
+    description: 'Go from "How\'s work?" to "What\'s your biggest fear?" in 60 seconds flat.',
+    benefit: 'Real conversations, immediately',
+    before: 'Surface small talk',
+    after: 'Profound connections',
     bgColor: 'bg-alt',
     accentColor: 'bg-primary',
     iconColor: 'text-primary',
@@ -17,9 +19,11 @@ const painPoints = [
   },
   {
     icon: Frown,
-    title: 'Connection Anxiety',
+    title: 'Group Magnet',
     description:
-      'The internal frustration and anxiety from failing to achieve authentic connections with your friends.',
+      'The game everyone requests. Watch your gatherings transform into legendary nights.',
+    benefit: 'Become the host everyone loves',
+    metric: '98% request replay',
     bgColor: 'bg-background',
     accentColor: 'bg-secondary',
     iconColor: 'text-secondary',
@@ -28,9 +32,11 @@ const painPoints = [
   },
   {
     icon: Puzzle,
-    title: 'Complicated Games',
+    title: 'Simple But Deep',
     description:
-      "The fear of bringing yet another game that's too complex to teach, killing the mood before it starts.",
+      'Learn in 60 seconds. Master over months. 10 power cards turn simple into strategic.',
+    benefit: 'Easy to start, impossible to master',
+    metric: 'Avg session: 3.5hrs',
     bgColor: 'bg-alt',
     accentColor: 'bg-primary',
     iconColor: 'text-primary',
@@ -44,7 +50,7 @@ export function Features() {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="py-24 px-4 relative overflow-hidden bg-alt">
+    <section ref={ref} className="py-24 px-4 relative bg-alt">
       {/* Background - MaskOff brand pattern */}
       <div className="absolute inset-0 opacity-[0.08]">
         <img src="/images/maskoff-pattern.png" alt="" className="w-full h-full object-cover" />
@@ -55,9 +61,9 @@ export function Features() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="inline-flex items-center gap-2 bg-destructive/10 border border-destructive/30 rounded-full px-4 py-2 mb-8"
+          className="inline-flex items-center gap-2 bg-secondary/20 border border-secondary/50 rounded-full px-4 py-2 mb-8"
         >
-          <span className="text-destructive text-sm font-semibold uppercase tracking-wide">
+          <span className="text-secondary text-sm font-semibold uppercase tracking-wide">
             The Villain
           </span>
         </motion.div>
@@ -97,20 +103,22 @@ export function Features() {
           transition={{ type: 'spring', stiffness: 80, delay: 0.5 }}
           className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted mb-16 max-w-4xl leading-relaxed font-bold"
         >
-          Are you tired of{' '}
+          Every gathering feels <span className="text-secondary font-black italic">empty</span>.
+          Every conversation stays <span className="text-secondary font-black italic">shallow</span>
+          . Everyone wears{' '}
           <motion.span
             initial={{ scale: 1 }}
             animate={isInView ? { scale: [1, 1.15, 1] } : {}}
             transition={{ duration: 0.6, delay: 1.2, repeat: Infinity, repeatDelay: 4 }}
-            className="text-primary font-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
+            className="text-secondary font-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
           >
-            trivial small talk
+            masks
           </motion.span>
-          , awkward silences, or that frustrating feeling that everyone is wearing a{' '}
-          <span className="text-foreground font-black italic text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-            social mask
+          .{' '}
+          <span className="text-primary font-black text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+            MaskOff removes them
           </span>
-          ? You spend time and money organizing gatherings only for them to stay on the surface.
+          —naturally.
         </motion.p>
 
         {/* Bento Box Grid Layout */}
@@ -189,10 +197,22 @@ export function Features() {
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : {}}
                         transition={{ delay: 1 + index * 0.2 }}
-                        className="text-muted text-lg md:text-xl leading-relaxed font-medium"
+                        className="text-muted text-lg md:text-xl leading-relaxed font-medium mb-4"
                       >
                         {pain.description}
                       </motion.p>
+
+                      {/* Benefit Badge */}
+                      {pain.benefit && (
+                        <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-2">
+                          <span className="text-primary text-sm font-bold">{pain.benefit}</span>
+                        </div>
+                      )}
+
+                      {/* Metric */}
+                      {pain.metric && (
+                        <div className="text-accent text-sm font-black mt-2">📊 {pain.metric}</div>
+                      )}
                     </div>
                   </div>
                 </div>

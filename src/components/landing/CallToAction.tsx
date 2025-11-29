@@ -2,21 +2,23 @@ import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import Button from '../ui/button';
 import { ArrowRight, TrendingDown, TrendingUp, Sparkles } from 'lucide-react';
+import { PayhipButton } from './PayhipButton';
+import { Newsletter } from './Newsletter';
 
 const paths = [
   {
     type: 'without',
     title: 'Without MaskOff',
-    gradient: 'from-destructive/20 via-destructive/10 to-transparent',
-    borderColor: 'border-destructive/30',
-    hoverBorder: 'hover:border-destructive/60',
+    gradient: 'from-secondary/20 via-secondary/10 to-transparent',
+    borderColor: 'border-secondary/30',
+    hoverBorder: 'hover:border-secondary/60',
     icon: TrendingDown,
-    iconColor: 'text-destructive',
+    iconColor: 'text-secondary',
     points: [
-      'Surface-level conversations that never go deeper',
-      'Forgettable game nights with disconnected friends',
-      'Frustration from failed attempts at real connection',
-      'Wasted money on games gathering dust',
+      '"How was your week?" "Good. Yours?" (every single gathering)',
+      'Phones out after 20 minutes. Nobody really connected.',
+      'Forgotten by Tuesday. Another wasted Saturday night.',
+      '$40 spent on games you play once and never touch again.',
     ],
   },
   {
@@ -28,10 +30,10 @@ const paths = [
     icon: TrendingUp,
     iconColor: 'text-primary',
     points: [
-      'Breakthrough moments of authentic connection',
-      'Legendary game nights people talk about for weeks',
-      'Deep bonds formed through honest conversations',
-      'The one game everyone always wants to play',
+      '"I never knew that about you!" (in the first 10 minutes)',
+      'Phones forgotten. Eyes locked. Real laughter, real tears.',
+      'Talked about for weeks. "When are we playing again?"',
+      'The game everyone begs you to bring. Every. Single. Time.',
     ],
   },
 ];
@@ -41,7 +43,7 @@ export function CallToAction() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-background via-alt to-background">
+    <section className="py-24 px-4 relative bg-gradient-to-b from-background via-alt to-background">
       {/* Background Glow Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -131,7 +133,7 @@ export function CallToAction() {
                   </motion.div>
                   <div>
                     <h3
-                      className={`text-2xl sm:text-3xl md:text-4xl font-black ${path.type === 'with' ? 'text-primary' : 'text-destructive'}`}
+                      className={`text-2xl sm:text-3xl md:text-4xl font-black ${path.type === 'with' ? 'text-primary' : 'text-secondary'}`}
                     >
                       {path.title}
                     </h3>
@@ -150,7 +152,7 @@ export function CallToAction() {
                     >
                       {/* Bullet Point */}
                       <div
-                        className={`mt-1 w-2 h-2 rounded-full ${path.type === 'with' ? 'bg-primary' : 'bg-destructive'} shrink-0`}
+                        className={`mt-1 w-2 h-2 rounded-full ${path.type === 'with' ? 'bg-primary' : 'bg-secondary'} shrink-0`}
                       />
                       <span
                         className={`text-sm sm:text-base md:text-lg leading-relaxed ${path.type === 'with' ? 'text-foreground font-medium' : 'text-muted'}`}
@@ -169,7 +171,7 @@ export function CallToAction() {
                   className={`relative overflow-hidden rounded-xl p-4 border ${path.borderColor} bg-gradient-to-br ${path.gradient}`}
                 >
                   <p
-                    className={`text-center font-bold text-sm sm:text-base ${path.type === 'with' ? 'text-primary' : 'text-destructive'}`}
+                    className={`text-center font-bold text-sm sm:text-base ${path.type === 'with' ? 'text-primary' : 'text-secondary'}`}
                   >
                     {path.type === 'with'
                       ? 'Transform Your Gatherings Forever'
@@ -204,8 +206,33 @@ export function CallToAction() {
             </p>
           </motion.div>
 
+          {/* Risk Reversal / Guarantee */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 1.15 }}
+            className="mb-8 bg-accent/10 border-2 border-accent/30 rounded-2xl p-6 max-w-2xl mx-auto"
+          >
+            <div className="flex items-start gap-4">
+              <div className="shrink-0">
+                <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">🛡️</span>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">
+                  ZERO RISK GUARANTEE
+                </h3>
+                <p className="text-sm sm:text-base text-muted leading-relaxed">
+                  Not satisfied? Full refund. No questions asked. No masks required. We're that
+                  confident you'll love this game.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Main CTA Button */}
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="mb-8">
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="mb-6">
             <a
               href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
               target="_blank"
@@ -218,14 +245,22 @@ export function CallToAction() {
                 {/* Button Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <span className="relative flex items-center gap-3 sm:gap-4 md:gap-5">
-                  <span className="font-black tracking-tight">BACK THIS PROJECT NOW</span>
-                  <motion.div
-                    animate={{ x: [0, 8, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <ArrowRight className="h-7 w-7 sm:h-9 sm:w-9 md:h-11 md:w-11" strokeWidth={3} />
-                  </motion.div>
+                <span className="relative flex flex-col items-center gap-2">
+                  <span className="flex items-center gap-3 sm:gap-4 md:gap-5">
+                    <span className="font-black tracking-tight">BACK NOW - SAVE 25%</span>
+                    <motion.div
+                      animate={{ x: [0, 8, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                      <ArrowRight
+                        className="h-7 w-7 sm:h-9 sm:w-9 md:h-11 md:w-11"
+                        strokeWidth={3}
+                      />
+                    </motion.div>
+                  </span>
+                  <span className="text-sm sm:text-base opacity-90 font-semibold">
+                    Early Bird ending soon
+                  </span>
                 </span>
               </Button>
             </a>
@@ -236,15 +271,53 @@ export function CallToAction() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 1.3 }}
-            className="inline-flex items-center gap-2 bg-destructive/10 border border-destructive/30 rounded-full px-6 py-3"
+            className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-6 py-3"
           >
-            <div className="w-2 h-2 bg-destructive rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <span className="text-sm sm:text-base font-semibold text-foreground">
-              <span className="text-destructive">Limited Time:</span> Campaign Ends in 72 Hours
+              <span className="text-accent">Limited Time:</span> Campaign Ends in 72 Hours
             </span>
+          </motion.div>
+
+          {/* Divider */}
+          <div className="my-16">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border/50"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-background text-muted">OR</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Payhip Donation Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1.4 }}
+            className="mb-6"
+          >
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold mb-6">
+              <span className="text-foreground">Can't back the full project?</span>
+              <br />
+              <span className="text-accent">Support us with a small donation!</span>
+            </p>
+            <PayhipButton
+              productId="YOUR_PAYHIP_PRODUCT_ID"
+              amount="$1"
+              variant="secondary"
+              size="lg"
+            />
+            <p className="text-sm text-muted mt-4">
+              Every dollar helps us bring MaskOff to life. Thank you!
+            </p>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Newsletter Section */}
+      <Newsletter />
 
       {/* Footer */}
       <motion.div
@@ -254,7 +327,6 @@ export function CallToAction() {
         className="text-center mt-24 text-muted text-xs sm:text-sm border-t border-border/50 pt-12 max-w-4xl mx-auto"
       >
         <p className="mb-2">© 2025 MaskOff Card Game. All rights reserved.</p>
-        <p className="text-muted/60">Powered by BackerKit</p>
       </motion.div>
     </section>
   );
