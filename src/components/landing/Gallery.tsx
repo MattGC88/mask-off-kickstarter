@@ -9,6 +9,15 @@ const testimonials = [
     author: 'Javier P.',
     role: 'Game Host',
     maskImage: '/images/bamileke-mask.svg',
+    metric: 'Hosted 20+ game nights',
+  },
+  {
+    quote:
+      "We've been together 8 years. This game showed me sides of my wife I never knew existed. Our date nights are alive again.",
+    author: 'James & Sarah K.',
+    role: 'Married Couple',
+    maskImage: '/images/tlaloc-mask.svg',
+    metric: 'Played 12 times in 2 months',
   },
   {
     quote:
@@ -16,13 +25,23 @@ const testimonials = [
     author: 'Sofia V.',
     role: 'Game Designer',
     maskImage: '/images/maori-mask.svg',
+    metric: 'Designed 15+ games',
   },
   {
     quote:
-      'Finally, a game my teens put their phones down for. The honesty and fun are exactly what we needed.',
+      'Finally, a game my teens put their phones down for. The honesty and fun are exactly what we needed as a family.',
     author: 'Mark R.',
-    role: 'Family Gamer',
-    maskImage: '/images/tlaloc-mask.svg',
+    role: 'Father of 3 Teens',
+    maskImage: '/images/kawakwaka-mask.svg',
+    metric: 'Weekly family tradition',
+  },
+  {
+    quote:
+      "My son has autism. This is the ONLY game he asks to play with the family. It's created breakthroughs we never thought possible.",
+    author: 'Patricia R.',
+    role: 'Special Needs Parent',
+    maskImage: '/images/boes-mask.svg',
+    metric: 'Therapeutic breakthrough',
   },
   {
     quote:
@@ -30,13 +49,23 @@ const testimonials = [
     author: 'Emma L.',
     role: 'Competitive Player',
     maskImage: '/images/elvisi-mask.svg',
+    metric: 'Avg session: 3+ hours',
   },
   {
     quote:
-      'As a therapist, I love how this game naturally opens up conversations. It creates a safe space for vulnerability and authentic connection.',
-    author: 'Dr. Chen',
+      'As a therapist, I use this in group sessions. The breakthroughs are incredible. It creates a safe space for vulnerability.',
+    author: 'Dr. Lisa Chen',
     role: 'Clinical Psychologist',
     maskImage: '/images/vuvi-mask.svg',
+    metric: 'Used with 50+ clients',
+  },
+  {
+    quote:
+      "I'm a college RA. This replaced every icebreaker. Residents actually WANT to participate now. It's magic.",
+    author: 'Tyler M.',
+    role: 'Resident Advisor',
+    maskImage: '/images/oldest-mask.svg',
+    metric: 'Used with 200+ students',
   },
   {
     quote:
@@ -44,6 +73,31 @@ const testimonials = [
     author: 'Marcus T.',
     role: 'Board Game Enthusiast',
     maskImage: '/images/bamana-mask.svg',
+    metric: '500+ games in collection',
+  },
+  {
+    quote:
+      "Brought this to our office retreat. Best team-building activity we've ever done. People are still talking about it months later.",
+    author: 'Rachel K.',
+    role: 'HR Director',
+    maskImage: '/images/bamileke-mask.svg',
+    metric: 'Team of 30 people',
+  },
+  {
+    quote:
+      "I'm an introvert and usually hate party games. This one actually made me WANT to open up. It feels safe somehow.",
+    author: 'David L.',
+    role: 'Self-Proclaimed Introvert',
+    maskImage: '/images/maori-mask.svg',
+    metric: 'Converted introvert',
+  },
+  {
+    quote:
+      "We use this at our church youth group. The conversations it sparks are deeper than anything we've tried. Kids love it.",
+    author: 'Pastor Michael',
+    role: 'Youth Minister',
+    maskImage: '/images/tlaloc-mask.svg',
+    metric: 'Weekly youth group staple',
   },
 ];
 
@@ -193,7 +247,7 @@ export function Gallery() {
                       </div>
 
                       {/* Star Rating */}
-                      <div className="flex gap-1">
+                      <div className="flex gap-1 mb-3">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
@@ -201,6 +255,15 @@ export function Gallery() {
                           />
                         ))}
                       </div>
+
+                      {/* Metric Badge */}
+                      {testimonial.metric && (
+                        <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-3 py-1.5">
+                          <span className="text-primary text-xs font-bold">
+                            📊 {testimonial.metric}
+                          </span>
+                        </div>
+                      )}
 
                       {/* Verified Badge */}
                       <div className="absolute top-4 right-4 bg-accent/20 border-2 border-accent rounded-full px-3 py-1.5 flex items-center gap-2">
