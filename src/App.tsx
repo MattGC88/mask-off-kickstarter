@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Sticky Urgency Bar */}
-      <UrgencyBar />
+      {/*<UrgencyBar />*/}
 
       {/* Block 1: The Header (Hero with UVP) */}
       <Hero />
@@ -24,14 +24,11 @@ function App() {
       {/* Block 2.5: Gameplay Preview (See It In Action) */}
       <GameplayPreview />
 
-      {/* Block 3: The Guide (How It Works) */}
-      <Stats />
-
       {/* Block 4: The Plan (3 Steps to Authenticity) */}
-      <ThePlan />
+      {/* <ThePlan /> */}
 
       {/* Block 4.5: Backer Rewards (Tier Breakdown) */}
-      <BackerRewards />
+      {/* <BackerRewards /> */}
 
       {/* Block 5: Social Proof (Testimonials) */}
       <Gallery />

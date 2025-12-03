@@ -260,7 +260,7 @@ export function Gallery() {
                       {testimonial.metric && (
                         <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-3 py-1.5">
                           <span className="text-primary text-xs font-bold">
-                            📊 {testimonial.metric}
+                            {testimonial.metric}
                           </span>
                         </div>
                       )}

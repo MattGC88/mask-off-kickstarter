@@ -1,6 +1,5 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import Button from '../ui/button';
 import { Gift, Rocket, Package, ArrowRight, MapPin } from 'lucide-react';
 
 const steps = [
@@ -111,22 +110,6 @@ export function ThePlan() {
                 <p className="text-muted text-sm sm:text-base mb-6 leading-relaxed">
                   {step.description}
                 </p>
-
-                {/* CTA Button */}
-                <a
-                  href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Button
-                    variant="outline"
-                    className="w-full border-primary/30 text-primary hover:bg-primary/10 hover:border-primary transition-all"
-                  >
-                    {step.cta}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </a>
               </div>
 
               {/* Connector Arrow (except for last item) */}

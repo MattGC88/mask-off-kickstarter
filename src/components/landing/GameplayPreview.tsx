@@ -1,165 +1,339 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Play, ArrowRight } from 'lucide-react';
-
-const gameplaySteps = [
-  {
-    step: 1,
-    image: '/illustrations/bamileke-card.png',
-    action: 'Player Draws',
-    question: '"What\'s your biggest fear?"',
-    glowClass: 'bg-primary/20',
-  },
-  {
-    step: 2,
-    image: '/illustrations/tlaloc-card.png',
-    action: 'Match or Power',
-    question: 'Color match or use POWER CARD',
-    glowClass: 'bg-secondary/20',
-  },
-  {
-    step: 3,
-    image: '/illustrations/maori-card.png',
-    action: 'Truth Revealed',
-    question: 'Connection made. Game on.',
-    glowClass: 'bg-accent/20',
-  },
-];
+import { Users, Clock, Play } from 'lucide-react';
 
 export function GameplayPreview() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 relative bg-background">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+    <section ref={ref} className="py-24 px-4 relative bg-background">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-alt via-background to-alt opacity-50" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-8"
-        >
-          <Play className="h-4 w-4 text-primary" />
-          <span className="text-primary text-sm font-semibold uppercase tracking-wide">
-            See It In Action
-          </span>
-        </motion.div>
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-16 gap-6">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            className="text-5xl md:text-6xl font-black leading-tight"
+          >
+            <span className="text-foreground">HOW TO</span>{' '}
+            <span className="text-primary">PLAY</span>
+          </motion.h2>
 
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1 }}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 sm:mb-6 text-center"
-        >
-          <span className="text-foreground">HOW A GAME</span>{' '}
-          <span className="text-primary">UNFOLDS</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.2 }}
-          className="text-lg sm:text-xl md:text-2xl text-muted text-center mb-8 sm:mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed"
-        >
-          Three simple steps. Infinite authentic moments.
-        </motion.p>
-
-        {/* 3-Step Visual Flow */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-4 lg:gap-6 mb-8 sm:mb-10 md:mb-12">
-          {gameplaySteps.map((step, index) => (
-            <motion.div
-              key={step.step}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + index * 0.2 }}
-              className="relative"
-            >
-              {/* Step Number Badge */}
-              <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl rotate-12">
-                <span className="text-xl sm:text-2xl font-black text-primary-foreground">
-                  {step.step}
-                </span>
+          {/* Player + Time info */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            className="flex gap-6"
+          >
+            {/* Players */}
+            <div className="flex items-center gap-3">
+              <Users className="w-8 h-8" />
+              <div>
+                <p className="text-sm font-bold">2–7 Players</p>
+                <p className="text-xs text-muted">Ages 7+</p>
               </div>
+            </div>
 
-              {/* Card Container */}
-              <div className="relative group">
-                {/* Glow Effect */}
-                <div
-                  className={`absolute inset-0 ${step.glowClass} rounded-2xl blur-xl group-hover:blur-2xl transition-all`}
-                />
-
-                {/* Card Image */}
-                <div className="relative bg-card border-2 border-border hover:border-primary rounded-xl sm:rounded-2xl p-3 sm:p-4 overflow-hidden transition-all duration-300 group-hover:scale-105">
-                  <img
-                    src={step.image}
-                    alt={step.action}
-                    className="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
-                  />
-
-                  {/* Action Label */}
-                  <div className="text-center">
-                    <h3 className="text-base sm:text-xl md:text-2xl font-black text-foreground mb-2">
-                      {step.action}
-                    </h3>
-                    <div className="bg-accent/10 border border-accent/30 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2">
-                      <p className="text-xs sm:text-sm md:text-base text-foreground font-semibold italic">
-                        {step.question}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            {/* Time */}
+            <div className="flex items-center gap-3">
+              <Clock className="w-8 h-8" />
+              <div>
+                <p className="text-sm font-bold">1–10 min</p>
+                <p className="text-xs text-muted">per round</p>
               </div>
-
-              {/* Connector Arrow (except for last step) */}
-              {index < gameplaySteps.length - 1 && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.6 + index * 0.2 }}
-                  className="hidden md:flex absolute top-1/2 -right-6 transform -translate-y-1/2 z-10"
-                >
-                  <ArrowRight
-                    className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary"
-                    strokeWidth={3}
-                  />
-                </motion.div>
-              )}
-
-              {/* Mobile Arrow (below) */}
-              {index < gameplaySteps.length - 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + index * 0.2 }}
-                  className="md:hidden flex justify-center my-4"
-                >
-                  <ArrowRight className="w-6 h-6 text-primary rotate-90" strokeWidth={2.5} />
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
         </div>
 
-        {/* Bottom Message */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.9 }}
-          className="text-center bg-primary/10 border-2 border-primary/30 rounded-2xl p-6 sm:p-8"
-        >
-          <p className="text-xl sm:text-2xl md:text-3xl font-black text-foreground mb-2">
-            That's it. Seriously.
-          </p>
-          <p className="text-base sm:text-lg text-muted">
-            Learn the rules in 60 seconds. Master the strategy over a lifetime.
-          </p>
-        </motion.div>
+        {/* Main Layout - 3 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col gap-10">
+            {/* OBJECT */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 }}
+              className="bg-card/50 border border-border rounded-2xl p-6"
+            >
+              <SectionTitle number="1" title="The Object" />
+              <p className="text-sm text-muted leading-relaxed">
+                Match masks. Get rid of your cards before anyone else. These are the official rules
+                to reveal your true self. House rules welcome.
+              </p>
+            </motion.div>
+
+            {/* SETUP */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 }}
+              className="bg-card/50 border border-border rounded-2xl p-6"
+            >
+              <SectionTitle number="2" title="The Set Up" />
+
+              <p className="text-sm text-muted mb-3">
+                Shuffle the deck. Deal each player 7 cards. Keep them secret. Place the rest face
+                down as the draw pile.
+              </p>
+              <p className="text-sm text-muted mb-4">
+                Flip the top card to start the discard pile — the game begins.
+              </p>
+
+              <img
+                src="/illustrations/setup-diagram.png"
+                alt="Game setup diagram"
+                className="rounded-xl w-full bg-alt/50 p-3"
+              />
+            </motion.div>
+          </div>
+
+          {/* MIDDLE COLUMN */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.25 }}
+            className="flex flex-col gap-10"
+          >
+            <div className="bg-card/50 border border-border rounded-2xl p-6">
+              <SectionTitle number="3" title="The Gameplay" />
+
+              <p className="text-sm text-muted mb-6">
+                The first player to match a mask starts the game. Play continues clockwise.
+              </p>
+
+              {/* Block */}
+              <GameplayBlock
+                label="DON'T BE TWO FACED"
+                text="Most cards have two masks. Match either mask to play."
+                image="/illustrations/two-faced.png"
+              />
+
+              <GameplayBlock
+                label="THE RULE OF 3s"
+                text="If you have 3 cards showing the same mask, play all three at once."
+                image="/illustrations/rule-of-3s.png"
+              />
+
+              {/* Rainbow Card */}
+              <GameplayBlock
+                label="RAINBOW (ALL-MASK) CARD"
+                image="/illustrations/rainbow-card.png"
+                text="Play on any card. You choose what mask it becomes. Next player must match it—or play another Rainbow."
+                extraNote="The only card you cannot change into is another Rainbow card."
+              />
+            </div>
+          </motion.div>
+
+          {/* RIGHT COLUMN */}
+          <div className="flex flex-col gap-10">
+            {/* DRAW */}
+            <InfoCard
+              delay={0.4}
+              label="DRAW"
+              image="/illustrations/draw-card.png"
+              points={[
+                'If you have no match, draw a card.',
+                'If it matches, play it.',
+                'If not, draw one more. If still no match, your turn ends.',
+              ]}
+            />
+
+            {/* POWER CARDS */}
+            <InfoCardImage
+              delay={0.5}
+              label="POWER (SINGLE MASK) CARDS"
+              image="/illustrations/power-cards.png"
+              text="Single Masks have special abilities. They can be played on matching masks, Rainbows, or inside 3s."
+            />
+
+            {/* WIN */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.55 }}
+              className="bg-card/50 border border-border rounded-2xl p-6"
+            >
+              <SectionTitle number="4" title="How To Win" />
+              <p className="text-sm text-muted mb-4">Get rid of all your masks — you win.</p>
+
+              <div className="space-y-4 text-xs">
+                <WinBlock title="Casual mode:" text="Count how many rounds each player wins." />
+                <WinBlock
+                  title="Strategic mode:"
+                  text="Count leftover masks as points: Rainbow = 10, Power Masks = 5, Others = 1. Low score wins."
+                />
+              </div>
+            </motion.div>
+
+            {/* QUICK CHECKS */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.65 }}
+              className="bg-card/50 border border-border rounded-2xl p-6"
+            >
+              <SectionTitle number="5" title="Quick Checks" />
+
+              <QuickCheck
+                q="Can I play two of the same cards even if they match?"
+                a="No. Only one card or three matching cards."
+              />
+              <QuickCheck
+                q="Can I play a single mask action card even if it doesn't match?"
+                a="No. Single masks must match."
+              />
+              <QuickCheck
+                q="What if someone played an unmatching card and I caught it?"
+                a="Keep playing. Stay sharp."
+              />
+
+              <div className="mt-4 bg-accent/10 border-2 border-accent/40 rounded-xl p-4">
+                <p className="text-xs font-bold text-accent">
+                  ⚠️ Increased authenticity may seem strange at first.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* BONUSES */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.75 }}
+              className="bg-card/50 border border-border rounded-2xl p-6"
+            >
+              <SectionTitle number="6" title="Bonuses" />
+              <p className="text-sm text-muted mb-3">
+                Try the <strong>Rapid version</strong> — no turns. Slam matching cards fast.
+              </p>
+              <p className="text-sm text-muted">
+                Or try the <strong>Pod version</strong>: collect masks instead of discarding them.
+              </p>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ---------------------------------- COMPONENTS ---------------------------------- */
+
+function SectionTitle({ number, title }) {
+  return (
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-foreground text-background font-black text-xl">
+        {number}
+      </div>
+      <h3 className="text-2xl font-black">{title}</h3>
+    </div>
+  );
+}
+
+function GameplayBlock({ label, text, image, extraNote }) {
+  return (
+    <div className="mb-8">
+      <div className="bg-foreground text-background px-4 py-1 rounded-full inline-block font-bold text-xs mb-3">
+        {label}
+      </div>
+
+      <p className="text-sm text-muted mb-4">{text}</p>
+
+      <img src={image} className="rounded-xl w-full bg-alt/50 p-3" />
+
+      {extraNote && (
+        <div className="mt-3 bg-accent/10 border border-accent/30 rounded-md p-3">
+          <p className="text-xs text-accent">{extraNote}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function VideoCard() {
+  return (
+    <div className="relative h-[320px] rounded-2xl overflow-hidden border border-primary/30 bg-card/40">
+      <div className="absolute inset-0 backdrop-blur-md" />
+
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative">
+          <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-xl">
+            <Play className="w-8 h-8 text-primary-foreground ml-1" />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+        <h3 className="text-white text-lg font-bold">How to Play MaskOff</h3>
+        <p className="text-white/70 text-xs">Quick tutorial — 2 minutes</p>
+      </div>
+    </div>
+  );
+}
+
+function InfoCard({ delay, label, image, points }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      className="bg-card/50 border border-border rounded-2xl p-6"
+    >
+      <div className="bg-foreground text-background px-4 py-1 rounded-full inline-block font-bold text-xs mb-4">
+        {label}
+      </div>
+
+      <div className="grid grid-cols-[110px_1fr] gap-4">
+        <img src={image} className="rounded-lg bg-alt/40 p-2" />
+
+        <ul className="text-xs text-muted space-y-1">
+          {points.map((p, i) => (
+            <li key={i}>- {p}</li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+}
+
+function InfoCardImage({ delay, label, image, text }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      className="bg-card/50 border border-border rounded-2xl p-6"
+    >
+      <div className="bg-foreground text-background px-4 py-1 rounded-full inline-block font-bold text-xs mb-4">
+        {label}
+      </div>
+
+      <p className="text-sm text-muted mb-4">{text}</p>
+
+      <img src={image} className="rounded-xl w-full bg-alt/50 p-3" />
+    </motion.div>
+  );
+}
+
+function WinBlock({ title, text }) {
+  return (
+    <div>
+      <p className="font-bold text-foreground mb-1 text-sm">{title}</p>
+      <p className="text-muted text-xs leading-relaxed">{text}</p>
+    </div>
+  );
+}
+
+function QuickCheck({ q, a }) {
+  return (
+    <div className="mb-4">
+      <p className="text-sm font-bold text-foreground">{q}</p>
+      <p className="text-xs text-muted">{a}</p>
+    </div>
   );
 }
 

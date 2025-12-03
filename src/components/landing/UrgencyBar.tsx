@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { Clock, Zap, Users } from 'lucide-react';
-import Button from '../ui/button';
 
 export function UrgencyBar() {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,20 +53,6 @@ export function UrgencyBar() {
               </span>
             </div>
           </div>
-
-          {/* Right: CTA */}
-          <a
-            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              size="sm"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg whitespace-nowrap"
-            >
-              BACK NOW - SAVE 25%
-            </Button>
-          </a>
         </div>
       </div>
 
