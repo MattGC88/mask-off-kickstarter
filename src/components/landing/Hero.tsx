@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import Button from '../ui/button';
-import { ArrowRight, Users, Clock, ChevronDown } from 'lucide-react';
+import { Users, Clock, ChevronDown } from 'lucide-react';
 import { PlayingCard } from './PlayingCard';
 
 export function Hero() {
@@ -111,54 +110,6 @@ export function Hero() {
               </div>
             </div>
           </div>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 mb-8"
-        >
-          {/* Primary CTA */}
-          <a
-            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              <span className="flex flex-col items-center gap-1">
-                <span className="flex items-center gap-2">
-                  BACK NOW - SAVE 25%
-                  <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform" />
-                </span>
-                <span className="text-xs sm:text-sm opacity-90 font-semibold">
-                  Early Bird pricing ends soon
-                </span>
-              </span>
-            </Button>
-          </a>
-
-          {/* Secondary CTA - $1 Expansion */}
-          <a
-            href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-primary text-primary hover:bg-primary/10 text-sm sm:text-base md:text-lg px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 rounded-xl group"
-            >
-              <span className="flex flex-col items-center gap-1">
-                <span>🎁 Try for Just $1</span>
-                <span className="text-xs sm:text-sm opacity-80">Zero commitment entry</span>
-              </span>
-            </Button>
-          </a>
         </motion.div>
 
         {/* Trust Signals & Urgency */}

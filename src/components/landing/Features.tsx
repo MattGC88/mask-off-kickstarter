@@ -1,11 +1,9 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Moon, Frown, Puzzle } from 'lucide-react';
 import { CardMasonry } from '../ui/CardMasonry';
 
 const painPoints = [
   {
-    icon: Moon,
     title: 'Instant Depth',
     description: 'Go from "How\'s work?" to "What\'s your biggest fear?" in 60 seconds flat.',
     benefit: 'Real conversations, immediately',
@@ -13,12 +11,10 @@ const painPoints = [
     after: 'Profound connections',
     bgColor: 'bg-alt',
     accentColor: 'bg-primary',
-    iconColor: 'text-primary',
     textColor: 'text-foreground',
     size: 'large', // Bento box sizing
   },
   {
-    icon: Frown,
     title: 'Group Magnet',
     description:
       'The game everyone requests. Watch your gatherings transform into legendary nights.',
@@ -26,12 +22,10 @@ const painPoints = [
     metric: '98% request replay',
     bgColor: 'bg-background',
     accentColor: 'bg-secondary',
-    iconColor: 'text-secondary',
     textColor: 'text-foreground',
     size: 'medium',
   },
   {
-    icon: Puzzle,
     title: 'Simple But Deep',
     description:
       'Learn in 60 seconds. Master over months. 10 power cards turn simple into strategic.',
@@ -39,7 +33,6 @@ const painPoints = [
     metric: 'Avg session: 3.5hrs',
     bgColor: 'bg-alt',
     accentColor: 'bg-primary',
-    iconColor: 'text-primary',
     textColor: 'text-foreground',
     size: 'small',
   },
@@ -172,11 +165,6 @@ export function Features() {
 
                   {/* Content */}
                   <div className="relative z-10 h-full flex flex-col justify-between">
-                    {/* Icon - static, no animation */}
-                    <div className={`${pain.iconColor} mb-6`}>
-                      <pain.icon className="w-16 h-16 md:w-20 md:h-20" strokeWidth={2} />
-                    </div>
-
                     {/* Title */}
                     <div>
                       <motion.h3
@@ -211,7 +199,7 @@ export function Features() {
 
                       {/* Metric */}
                       {pain.metric && (
-                        <div className="text-accent text-sm font-black mt-2">📊 {pain.metric}</div>
+                        <div className="text-accent text-sm font-black mt-2">{pain.metric}</div>
                       )}
                     </div>
                   </div>

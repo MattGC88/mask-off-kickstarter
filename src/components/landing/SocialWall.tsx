@@ -1,64 +1,13 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Instagram, MessageSquare, Users } from 'lucide-react';
+import { MessageSquare, Users } from 'lucide-react';
+import { InstagramEmbed } from 'react-social-media-embed';
 
-const ugcContent = [
-  {
-    type: 'photo',
-    src: '/images/masktable.png', // Using existing product image as placeholder
-    caption: 'Game night level: LEGENDARY 🔥',
-    author: '@maskoff_players',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/bamileke-card.png',
-    caption: 'The artwork on these cards is INSANE',
-    author: '@card_collector',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/tlaloc-card.png',
-    caption: 'This question changed everything 💯',
-    author: '@deep_convos',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/maori-card.png',
-    caption: 'Most authentic game I\'ve ever played',
-    author: '@boardgame_nights',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/kawakwaka-card.png',
-    caption: 'My friends can\'t stop requesting this',
-    author: '@party_host_pro',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/elvise-card.png',
-    caption: 'The power cards are GENIUS 🎯',
-    author: '@strategy_games',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/vuvi-card.png',
-    caption: 'Finally, real conversations',
-    author: '@authentic_living',
-    platform: 'instagram'
-  },
-  {
-    type: 'photo',
-    src: '/illustrations/bamana-card.png',
-    caption: 'Cultural masks + deep questions = 💎',
-    author: '@game_design_fan',
-    platform: 'instagram'
-  },
+// Add real Instagram post URLs from @maskoffgame here
+const instagramPosts = [
+  'https://www.instagram.com/p/DO3t2WzkctC/',
+  'https://www.instagram.com/p/DLEFLANJ0Px/',
+  'https://www.instagram.com/p/DHBx2r5JQf6/?img_index=1',
 ];
 
 export function SocialWall() {
@@ -100,42 +49,28 @@ export function SocialWall() {
           </p>
         </motion.div>
 
-        {/* Masonry grid of UGC */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
-          {ugcContent.map((item, index) => (
+        {/* Instagram Feed Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-5xl mx-auto">
+          {instagramPosts.map((url, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.1 + index * 0.05 }}
-              className="relative group cursor-pointer"
+              className="relative group"
             >
-              <div className="relative aspect-square rounded-xl overflow-hidden bg-card border-2 border-border hover:border-primary transition-all duration-300 shadow-lg hover:shadow-2xl">
-                {/* Image */}
-                <img
-                  src={item.src}
-                  alt={item.caption}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              <div className="instagram-card-wrapper">
+                <InstagramEmbed
+                  url={url}
+                  width="100%"
+                  captioned={false}
+                  placeholderImageUrl="/images/masktable.png"
+                  placeholderSpinner={
+                    <div className="flex items-center justify-center h-full min-h-[400px]">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    </div>
+                  }
                 />
-
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
-                  <p className="text-white text-sm sm:text-base mb-2 font-semibold leading-snug">
-                    {item.caption}
-                  </p>
-                  <div className="flex items-center gap-2 text-white/80 text-xs sm:text-sm">
-                    <Instagram className="w-4 h-4" />
-                    <span className="font-medium">{item.author}</span>
-                  </div>
-                </div>
-
-                {/* Platform badge (always visible) */}
-                <div className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
-                  <Instagram className="w-4 h-4 text-primary" />
-                </div>
               </div>
             </motion.div>
           ))}
@@ -148,7 +83,7 @@ export function SocialWall() {
           transition={{ delay: 0.6 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary/30 rounded-2xl px-6 py-4">
+          <div className="inline-flex items-center gap-3 bg-primary/10 border-2 border-primary/30 rounded-2xl px-6 py-4 mb-6">
             <Users className="w-6 h-6 text-primary" />
             <p className="text-base sm:text-lg text-foreground font-bold">
               Join the movement:{' '}
@@ -157,6 +92,26 @@ export function SocialWall() {
           </div>
         </motion.div>
       </div>
+
+      {/* Custom CSS to clean up Instagram embeds */}
+      <style>{`
+        .instagram-card-wrapper {
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          transition: all 0.3s ease;
+        }
+
+        .instagram-card-wrapper:hover {
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          transform: translateY(-4px);
+        }
+
+        .instagram-card-wrapper iframe {
+          border: none !important;
+          border-radius: 12px !important;
+        }
+      `}</style>
     </section>
   );
 }

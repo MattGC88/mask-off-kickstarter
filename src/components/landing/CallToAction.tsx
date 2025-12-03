@@ -1,8 +1,7 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import Button from '../ui/button';
-import { ArrowRight, TrendingDown, TrendingUp, Sparkles } from 'lucide-react';
-import { PayhipButton } from './PayhipButton';
+import { TrendingDown, TrendingUp, Sparkles } from 'lucide-react';
+import { PayPalButton } from './PayPalButton';
 import { Newsletter } from './Newsletter';
 
 const paths = [
@@ -205,110 +204,14 @@ export function CallToAction() {
               </span>
             </p>
           </motion.div>
-
-          {/* Risk Reversal / Guarantee */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 1.15 }}
-            className="mb-8 bg-accent/10 border-2 border-accent/30 rounded-2xl p-6 max-w-2xl mx-auto"
-          >
-            <div className="flex items-start gap-4">
-              <div className="shrink-0">
-                <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center">
-                  <span className="text-2xl">🛡️</span>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">
-                  ZERO RISK GUARANTEE
-                </h3>
-                <p className="text-sm sm:text-base text-muted leading-relaxed">
-                  Not satisfied? Full refund. No questions asked. No masks required. We're that
-                  confident you'll love this game.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Main CTA Button */}
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="mb-6">
-            <a
-              href="https://www.backerkit.com/call_to_action/76df4bd8-01ac-412d-b684-39c90284624b/landing"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="relative bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl px-10 py-7 sm:px-14 sm:py-8 md:px-20 md:py-10 lg:px-24 lg:py-12 rounded-2xl shadow-2xl hover:shadow-primary/50 transition-all duration-500 group overflow-hidden"
-              >
-                {/* Button Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <span className="relative flex flex-col items-center gap-2">
-                  <span className="flex items-center gap-3 sm:gap-4 md:gap-5">
-                    <span className="font-black tracking-tight">BACK NOW - SAVE 25%</span>
-                    <motion.div
-                      animate={{ x: [0, 8, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                      <ArrowRight
-                        className="h-7 w-7 sm:h-9 sm:w-9 md:h-11 md:w-11"
-                        strokeWidth={3}
-                      />
-                    </motion.div>
-                  </span>
-                  <span className="text-sm sm:text-base opacity-90 font-semibold">
-                    Early Bird ending soon
-                  </span>
-                </span>
-              </Button>
-            </a>
-          </motion.div>
-
-          {/* Urgency Badge */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.3 }}
-            className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-6 py-3"
-          >
-            <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-sm sm:text-base font-semibold text-foreground">
-              <span className="text-accent">Limited Time:</span> Campaign Ends in 72 Hours
-            </span>
-          </motion.div>
-
-          {/* Divider */}
-          <div className="my-16">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border/50"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-background text-muted">OR</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Payhip Donation Button */}
+          {/* PayPal Donation Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 1.4 }}
             className="mb-6"
           >
-            <p className="text-xl sm:text-2xl md:text-3xl font-bold mb-6">
-              <span className="text-foreground">Can't back the full project?</span>
-              <br />
-              <span className="text-accent">Support us with a small donation!</span>
-            </p>
-            <PayhipButton
-              productId="YOUR_PAYHIP_PRODUCT_ID"
-              amount="$1"
-              variant="secondary"
-              size="lg"
-            />
+            <PayPalButton amount="$1" variant="secondary" size="lg" />
             <p className="text-sm text-muted mt-4">
               Every dollar helps us bring MaskOff to life. Thank you!
             </p>
