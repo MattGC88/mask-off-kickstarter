@@ -22,29 +22,23 @@ export function Newsletter() {
     setStatus('loading');
 
     try {
-      // Shopify Email API endpoint
-      // You'll need to get your Shopify store domain
-      const shopifyDomain = window.location.hostname; // or set manually: 'your-store.myshopify.com'
-
-      const response = await fetch(`https://${shopifyDomain}/contact`, {
+      // Call Vercel serverless function
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams({
-          form_type: 'customer',
-          utf8: '✓',
-          'contact[email]': email,
-          'contact[tags]': 'newsletter', // Tag for segmentation
-        }),
+        body: JSON.stringify({ email }),
       });
 
-      if (response.ok || response.redirected) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setStatus('success');
-        setMessage('Thanks for subscribing! Check your email for updates.');
+        setMessage(data.message || 'Thanks for subscribing! Check your email for updates.');
         setEmail('');
       } else {
-        throw new Error('Subscription failed');
+        throw new Error(data.error || 'Subscription failed');
       }
     } catch (error) {
       setStatus('error');
