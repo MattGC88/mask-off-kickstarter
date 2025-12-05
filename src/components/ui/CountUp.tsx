@@ -8,19 +8,17 @@ interface CountUpProps {
   className?: string;
 }
 
-export function CountUp({ value, duration = 2, suffix = '', className = '' }: CountUpProps) {
+export function CountUp({ value, suffix = '', className = '' }: CountUpProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   const spring = useSpring(0, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
-  const display = useTransform(spring, (current) =>
-    Math.round(current).toLocaleString()
-  );
+  const display = useTransform(spring, (current) => Math.round(current).toLocaleString());
 
   useEffect(() => {
     if (isInView) {

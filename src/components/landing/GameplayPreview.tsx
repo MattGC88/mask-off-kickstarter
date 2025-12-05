@@ -1,6 +1,6 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Users, Clock, Play } from 'lucide-react';
+import { Users, Clock } from 'lucide-react';
 
 export function GameplayPreview() {
   const ref = useRef(null);
@@ -223,7 +223,7 @@ export function GameplayPreview() {
 
 /* ---------------------------------- COMPONENTS ---------------------------------- */
 
-function SectionTitle({ number, title }) {
+function SectionTitle({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-foreground text-background font-black text-xl">
@@ -234,7 +234,17 @@ function SectionTitle({ number, title }) {
   );
 }
 
-function GameplayBlock({ label, text, image, extraNote }) {
+function GameplayBlock({
+  label,
+  text,
+  image,
+  extraNote,
+}: {
+  label: string;
+  text: string;
+  image: string;
+  extraNote?: string;
+}) {
   return (
     <div className="mb-8">
       <div className="bg-foreground text-background px-4 py-1 rounded-full inline-block font-bold text-xs mb-3">
@@ -243,7 +253,7 @@ function GameplayBlock({ label, text, image, extraNote }) {
 
       <p className="text-sm text-muted mb-4">{text}</p>
 
-      <img src={image} className="rounded-xl w-full bg-alt/50 p-3" />
+      <img src={image} alt={label} className="rounded-xl w-full bg-alt/50 p-3" />
 
       {extraNote && (
         <div className="mt-3 bg-accent/10 border border-accent/30 rounded-md p-3">
@@ -254,28 +264,17 @@ function GameplayBlock({ label, text, image, extraNote }) {
   );
 }
 
-function VideoCard() {
-  return (
-    <div className="relative h-[320px] rounded-2xl overflow-hidden border border-primary/30 bg-card/40">
-      <div className="absolute inset-0 backdrop-blur-md" />
-
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative">
-          <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-xl">
-            <Play className="w-8 h-8 text-primary-foreground ml-1" />
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-        <h3 className="text-white text-lg font-bold">How to Play MaskOff</h3>
-        <p className="text-white/70 text-xs">Quick tutorial — 2 minutes</p>
-      </div>
-    </div>
-  );
-}
-
-function InfoCard({ delay, label, image, points }) {
+function InfoCard({
+  delay,
+  label,
+  image,
+  points,
+}: {
+  delay: number;
+  label: string;
+  image: string;
+  points: string[];
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -288,7 +287,7 @@ function InfoCard({ delay, label, image, points }) {
       </div>
 
       <div className="grid grid-cols-[110px_1fr] gap-4">
-        <img src={image} className="rounded-lg bg-alt/40 p-2" />
+        <img src={image} alt={label} className="rounded-lg bg-alt/40 p-2" />
 
         <ul className="text-xs text-muted space-y-1">
           {points.map((p, i) => (
@@ -300,7 +299,17 @@ function InfoCard({ delay, label, image, points }) {
   );
 }
 
-function InfoCardImage({ delay, label, image, text }) {
+function InfoCardImage({
+  delay,
+  label,
+  image,
+  text,
+}: {
+  delay: number;
+  label: string;
+  image: string;
+  text: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -314,12 +323,12 @@ function InfoCardImage({ delay, label, image, text }) {
 
       <p className="text-sm text-muted mb-4">{text}</p>
 
-      <img src={image} className="rounded-xl w-full bg-alt/50 p-3" />
+      <img src={image} alt={label} className="rounded-xl w-full bg-alt/50 p-3" />
     </motion.div>
   );
 }
 
-function WinBlock({ title, text }) {
+function WinBlock({ title, text }: { title: string; text: string }) {
   return (
     <div>
       <p className="font-bold text-foreground mb-1 text-sm">{title}</p>
@@ -328,7 +337,7 @@ function WinBlock({ title, text }) {
   );
 }
 
-function QuickCheck({ q, a }) {
+function QuickCheck({ q, a }: { q: string; a: string }) {
   return (
     <div className="mb-4">
       <p className="text-sm font-bold text-foreground">{q}</p>

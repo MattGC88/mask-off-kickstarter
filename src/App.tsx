@@ -1,13 +1,9 @@
 import { Hero } from './components/landing/Hero';
 import { Features } from '@/components/landing/Features';
 import { GameplayPreview } from '@/components/landing/GameplayPreview';
-import { Stats } from '@/components/landing/Stats';
-import { ThePlan } from '@/components/landing/ThePlan';
-import { BackerRewards } from '@/components/landing/BackerRewards';
 import { Gallery } from '@/components/landing/Gallery';
 import { SocialWall } from '@/components/landing/SocialWall';
 import { CallToAction } from '@/components/landing/CallToAction';
-import { UrgencyBar } from '@/components/landing/UrgencyBar';
 
 function App() {
   return (
